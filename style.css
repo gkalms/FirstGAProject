@@ -1,0 +1,12 @@
+
+
+body {
+    text-align: center;
+  }
+  h1 {
+    color: orange;
+  }
+  .btn {
+    width: 60px;
+    height: 40px
+  }

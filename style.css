@@ -1,22 +1,22 @@
 
 
-body {
+/* body {
     text-align: center;
-  }
+  } */
   h1 {
+    text-align: center;
     color: orange;
   }
-  .container {
+  #container {
+    width: 500;
+    height: 500;
+    border: solid;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    align-items: flex-start;
-    align-content: space-around;
+    align-items: center;
+    align-content: center;
   }
-
-  /* .alphabet {
-    border: dotted;
-  } */
 
   .btn {
     width: 60px;
@@ -27,5 +27,5 @@ body {
     height: 30px;
     border: solid;
     margin-top: 20px;
-    margin-left: 300px
+    /* margin-left: 300px */
   }

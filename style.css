@@ -6,10 +6,17 @@ body {
   h1 {
     color: orange;
   }
-
-  .alphabet {
-    border: dotted;
+  .container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: space-around;
   }
+
+  /* .alphabet {
+    border: dotted;
+  } */
 
   .btn {
     width: 60px;

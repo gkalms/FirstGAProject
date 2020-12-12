@@ -2,6 +2,13 @@ console.log("hello");
 
 //Object to store words for alphabet
 
+const image1 = "https://images.unsplash.com/photo-1502899845910-573a1d1c390d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c21hbGwlMjBpbWFnZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60";
+const image2 = "https://images.unsplash.com/photo-1536427824649-fbf2e4a33d40?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTd8fHNtYWxsJTIwaW1hZ2VzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60";
+const image3 = "https://images.unsplash.com/photo-1502234036632-89501d54f8fe?ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8c21hbGwlMjBpbWFnZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60";
+const image4 = "https://images.unsplash.com/photo-1502321660926-350b34618f79?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OXx8c21hbGwlMjBpbWFnZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60";
+console.log(image2)
+const savedImages = [image1,image2,image3,image4];
+
 const words = {
     A: ["apple","ant","ape","antelope","animals"],
     B: ["boy","bee","biscuit","bat","bath","ball"],
@@ -58,10 +65,14 @@ $(".btn").on("click", (e) => {
 // Can i use frestyle button to add happy picture to paragraph
 $("#freestyle").on("click", () => {
     $("p").html("");
-    console.log("pictures");
-const image = `<img id="img-from-url" src="https://images.unsplash.com/photo-1502899845910-573a1d1c390d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c21hbGwlMjBpbWFnZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"></img>`;
-    $("p").append(image); //appedning works - now fix image
+    const imageChoice = Math.floor(Math.random() * Math.floor(savedImages.length));
+    $("p").append(imageChoice);
 });
+
+// $("#freestyle").on("click", () => {
+//         $("p").html("");
+//         $("p").append(image2);
+//     });
 
 //   Clear the text
 $("#clear").on("click", () => {

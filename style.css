@@ -1,8 +1,8 @@
 
 
-/* body {
+body {
     text-align: center;
-  } */
+  }
   h1 {
     text-align: center;
     color: orange;
@@ -30,7 +30,14 @@
   .btn {
     width: 60px;
     height: 40px
-  
+  }
+  #clear {
+    width: 60px;
+    height: 40px
+  }
+  #freestyle {
+    width: 60px;
+    height: 40px
   }
   p {
     width: 300px;

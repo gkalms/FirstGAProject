@@ -1,4 +1,5 @@
 console.log("hello");
+
 //Object to store words for alphabet
 
 const words = {
@@ -35,9 +36,12 @@ const words = {
 const d = new Date();
 $("h2").html("Today is the " + d.toLocaleDateString());  
 
-//Get value from clicked button into text box
+//Get words from alphabet object
 $(".btn").on("click", (e) => {
     console.log("button clicked")
+        //Clear pre-existing text
+        $("p").html("");
+        console.log("all clear!");
     let input = e.target.innerHTML;
     console.log(input);
     const randomWords = words[input]; 
@@ -51,7 +55,13 @@ $(".btn").on("click", (e) => {
     // console.log(randomWords[randomIndex]);
 });
 
-// Can i use frestyle button to add happy picture to paragraph??
+// Can i use frestyle button to add happy picture to paragraph
+$("#freestyle").on("click", () => {
+    $("p").html("");
+    console.log("pictures");
+const image = `<img id="img-from-url" src="https://images.unsplash.com/photo-1502899845910-573a1d1c390d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c21hbGwlMjBpbWFnZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"></img>`;
+    $("p").append(image); //appedning works - now fix image
+});
 
 //   Clear the text
 $("#clear").on("click", () => {

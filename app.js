@@ -6,8 +6,7 @@ const image1 = "https://images.unsplash.com/photo-1502899845910-573a1d1c390d?ixi
 const image2 = "https://images.unsplash.com/photo-1536427824649-fbf2e4a33d40?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTd8fHNtYWxsJTIwaW1hZ2VzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60";
 const image3 = "https://images.unsplash.com/photo-1502234036632-89501d54f8fe?ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8c21hbGwlMjBpbWFnZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60";
 const image4 = "https://images.unsplash.com/photo-1502321660926-350b34618f79?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OXx8c21hbGwlMjBpbWFnZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60";
-console.log(image2)
-const savedImages = [image1,image2,image3,image4];
+const savedImages = [image1,image2,image3,image4]; //Array
 
 const words = {
     A: ["apple","ant","ape","antelope","animals"],
@@ -65,13 +64,16 @@ $(".btn").on("click", (e) => {
 // Can i use frestyle button to add happy picture to paragraph
 $("#freestyle").on("click", () => {
     $("p").html("");
-    const imageChoice = Math.floor(Math.random() * Math.floor(savedImages.length));
-    $("p").append(imageChoice);
+    let imageChoice = Math.floor(Math.random() * Math.floor(savedImages.length)); //
+    // console.log(imageChoice);
+    console.log(savedImages[imageChoice]);
+    // $("p").append(imageChoice);
+    $("p").append(`<img src=${savedImages[imageChoice]}/>`);
 });
 
 // $("#freestyle").on("click", () => {
 //         $("p").html("");
-//         $("p").append(image2);
+//         $("p").append('<img src="https://images.unsplash.com/photo-1502899845910-573a1d1c390d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c21hbGwlMjBpbWFnZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"/>');
 //     });
 
 //   Clear the text

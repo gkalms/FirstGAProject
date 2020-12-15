@@ -4,21 +4,49 @@ body {
     text-align: center;
   }
   h1 {
+    text-align: center;
     color: orange;
   }
+  #container {
+    width: 500;
+    height: 500;
+    border: solid;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+  }
 
-  .alphabet {
-    border: dotted;
+  #greetbox {
+  }
+
+  #alphabox {
+  }
+
+  #inputbox {
   }
 
   .btn {
     width: 60px;
     height: 40px
   }
+  #clear {
+    width: 60px;
+    height: 40px
+  }
+  #freestyle {
+    width: 60px;
+    height: 40px
+  }
   p {
     width: 300px;
-    height: 30px;
+    min-height: 30px;
     border: solid;
     margin-top: 20px;
-    margin-left: 300px
+    /* margin-left: 300px */
+  }
+  .imgUrl {
+    width: 300px;
+    height: 150px;
   }

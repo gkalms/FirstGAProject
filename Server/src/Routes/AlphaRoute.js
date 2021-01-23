@@ -4,27 +4,26 @@ const AlphabetApi = require("../Models/AlphabetModel");
 
 const router = express.Router();
 
-//Create the alphabet category via postman
+//Create the alphabet category
 router.post("/alphabet", (request, response) => {
-    const requestBody = request.body;
-    AlphabetApi.create(requestBody).then((data) => {
-      response.send(data);
-    }).catch(() => {
-      response.status(500).send("unable to create alphabet category");
-    });
+  const requestBody = request.body;
+  AlphabetApi.create(requestBody).then((data) => {
+    response.send(data);
+  }).catch(() => {
+    response.status(500).send("unable to create alphabet category");
   });
+});
 
-  //get all Alphabet from database
+//get alphabet list
 router.get("/alphabet/all", (request, response) => {
-    AlphabetApi.find().then((categories) => {
-      response.send(categories);
-    }).catch((error) => {
-      console.log('error', error);
-      response.status(500).send("cannot upload alphabet list");
-    });
-    });
-    
-// pre-populate word document in relation to alphabet
+  AlphabetApi.find().then((data) => {
+    response.send(data);
+  }).catch((error) => {
+    response.status(500).send("cannot upload alphabet list");
+  });
+});
+
+// create words
 router.post("/words", (request, response) => {
   const requestBody = request.body;
   WordsApi.create(requestBody).then((data) => {
@@ -33,5 +32,46 @@ router.post("/words", (request, response) => {
     response.status(500).send("unable to create the word");
   });
 });
- 
-    module.exports = router;
+
+//get words
+router.get("/words/all", (request, response) => {
+  WordsApi.find().then((data) => {
+    response.send(data);
+  }).catch((error) => {
+    response.status(500).send("cannot upload words' list");
+  });
+});
+
+module.exports = router;
+
+// update words
+router.patch("/update-word/:id", (request, response) => {
+  WordsModel.findByIdAndUpdate(request.params.id, request.body, {
+    new: true,
+    upsert: true,
+  })
+    .then((data) => {
+      console.log("Update successful!");
+      response.send(data);
+    })
+    .catch(() => {
+      console.log("Something went wrong!!");
+      response.status(404).send("Word was not found!!");
+    });
+});
+
+
+// delete words
+router.delete("/delete-word/:id", (request, response) => {
+  WordsModel.findByIdAndDelete(request.params.id)
+    .then((data) => {
+      console.log("Delete successful!");
+      response.send(data);
+    })
+    .catch(() => {
+      console.log("Something went wrong!!");
+      response.status(404).send("Word was not found!!");
+    });
+});
+
+module.exports = router;

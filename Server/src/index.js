@@ -3,14 +3,24 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// Initialise mongoose - connect to mongodb
-mongoose.connect("mongodb://localhost:27017/Project2", {
+// Import routers
+const alphabetRouter = require("./Routes/AlphaRoute");
+const userRouter = require("./Routes/UserRoute");
+
+// Connect to mongodb
+mongoose.connect("mongodb://localhost:27017/Elena-Project2", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 // Initialise app object
 const app = express();
+
+const port = 3000;
+
+// Middleware - to read and understand json files)
+app.use(express.json());
+app.use(cors());
 app.use(
   session({
     secret: "Secret word",
@@ -19,18 +29,11 @@ app.use(
   })
 );
 
-const port = 3000;
-
-const alphabetRouter = require("./Routes/AlphaRoute");
-const userRouter = require("./Routes/UserRoute");
-
-app.use(express.json());
-app.use(cors()); 
-
+// Use the initilaised routers
 app.use("/api/alphabet", alphabetRouter);
 app.use("/api/user", userRouter);
 
-// Start your server by listening for requests
+// Start listening
 app.listen(port, () =>
   console.log(`Listening at http://localhost:${port}`)
 );

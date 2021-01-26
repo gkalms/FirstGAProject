@@ -18,7 +18,7 @@ label   {color: blue;}
   <button type="submit" class="btn btn-primary">Submit</button>
   </div>
   <div>
-  <button type="submit" class="btn btn-danger">Play</button>
+  <button type="submit" class="btn btn-danger">Player</button>
   </div>
 </form>
 

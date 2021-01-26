@@ -1,7 +1,8 @@
 import "regenerator-runtime/runtime";
-import homepageForm from "./homepage";
-$("body").prepend(selectUser());
-console.log("does this work");
+
+import loginUser from "./loginUser";
+
+$("body").prepend(loginUser());
 
 
   

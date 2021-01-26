@@ -868,23 +868,48 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"src/homepage.js":[function(require,module,exports) {
+},{}],"src/loginUser.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var homepageForm = "\n<form id=\"homepage\">\n<style>\nbody {background-color: powderblue;}\nlabel   {color: blue;}\n.form-control {width: 300px;}\n</style>\n<h1>Welcome</h1>\n<div>\n<button type=\"submit\" id=\"admin\" class=\"btn btn-danger\">Admin</button>\n</div>\n<div>\n<button type=\"submit\" id=\"player\" class=\"btn btn-danger\">Player</button>\n</div>\n</form>\n\n";
+var form = "\n<form id=\"login-user\">\n<style>\nbody {background-color: powderblue;}\nlabel   {color: blue;}\n.form-control {width: 300px;}\n</style>\n<h1>Admin login</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">User name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter Username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </div>\n</form>\n\n";
 
-var selectUser = function selectUser() {
-  $(document).on("submit", "#homepage", /*#__PURE__*/function () {
+var loginUser = function loginUser() {
+  $(document).on("submit", "#login-user", /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+      var formData, response;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              console.log("event", event);
               event.preventDefault();
+              formData = {
+                username: $("input[name='username']").val(),
+                password: $("input[name='password']").val()
+              };
+              console.log("form data", formData);
+              _context.next = 6;
+              return $.ajax({
+                type: "POST",
+                url: "/api/user/login",
+                contentType: "application/json",
+                data: JSON.stringify(formData)
+              });
 
-            case 1:
+            case 6:
+              response = _context.sent;
+              console.log("response", response);
+
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -896,28 +921,22 @@ var selectUser = function selectUser() {
       return _ref.apply(this, arguments);
     };
   }());
-  return homepageForm;
-  console.log("Welcome!");
-}; // If $("#admin").on("click", (e) => {
-//     $("homepageForm").append(loginUser());
-//     console.log("Welcome parent!");
-// else
-//     $("#admin").hide;
-//     $("homepageForm").append(player());
-//     console.log("more to come");
-// });
+  return form;
+};
+
+var _default = loginUser;
+exports.default = _default;
 },{}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
 require("regenerator-runtime/runtime");
 
-var _homepage = _interopRequireDefault(require("./homepage"));
+var _loginUser = _interopRequireDefault(require("./loginUser"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-$("body").prepend(selectUser());
-console.log("does this work");
-},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./homepage":"src/homepage.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+$("body").prepend((0, _loginUser.default)());
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./loginUser":"src/loginUser.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -945,7 +964,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51218" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64735" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

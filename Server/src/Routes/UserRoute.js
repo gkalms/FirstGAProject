@@ -46,6 +46,24 @@ router.post("/login", (request, response) => {
   });
 });
 
+// // Login user - without encryption
+// router.post("/login", (request, response) => {
+//   UserModel.findOne({ name: request.body.name }).then((data) => {
+//     if (data) {
+//       const checkPassword = (request.body.password, data.password);
+//       console.log("request body password", request.body.password);
+//       console.log("data password", data.password);
+//       if (checkPassword) {
+//         response.send("logged in");
+//       } else {
+//         response.status(401).send("Incorrect credentials");
+//       }
+//     } else {
+//       response.status(401).send("Wrong user credentials");
+//     }
+//   });
+// });
+
 // Logout user
 router.get("/logout", (request, response) => {
   request.session.loggedIn = false;
@@ -64,6 +82,18 @@ router.post("/register", (request, response) => {
     response.send(data);
   })
 });
+
+// // Register user without hashing
+// router.post("/register", (request, response) => {
+//   const body = request.body;
+//   const password = body.password;
+//   console.log("password", password)
+//   const user = { name: body.name, password: password };
+//   console.log("user:", user);
+//   UserModel.create(user).then((data) => {
+//     response.send(data);
+//   })
+// });
 
 // Update user?? 
 

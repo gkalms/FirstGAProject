@@ -42,7 +42,21 @@ router.get("/words/all", (request, response) => {
   });
 });
 
-module.exports = router;
+//get words random
+router.get("/words/random", (request, response) => {
+  
+  WordsApi.find().then((data) => {
+    let input = e.target.innerHTML;
+    const randomWords = words[input]; 
+    const randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
+    const randomWord = randomWords[randomIndex];
+    $("p").append(`${randomWord} `);
+  response.send(data);
+  }).catch((error) => {
+    response.status(500).send("cannot upload words' list");
+  });
+});
+
 
 // update words
 router.patch("/update-word/:id", (request, response) => {

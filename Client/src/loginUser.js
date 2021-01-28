@@ -27,7 +27,7 @@ const loginUser = () => {
         event.preventDefault();
 
         const formData = {
-            username: $("input[name='username']").val(),
+            name: $("input[name='username']").val(),
             password: $("input[name='password']").val(),
         };
         console.log("form data", formData);

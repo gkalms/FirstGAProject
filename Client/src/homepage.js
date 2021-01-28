@@ -27,8 +27,9 @@ const homePage = () => {
         $("body").prepend(loginUser());
     });
     // On selecting Player button - load Player form
-    $("document").on("click", "#player", async (event) => {
+    $(document).on("click", "#player", async (event) => {
         event.preventDefault();
+        console.log("event is happening");
         $("body").empty();
         $("body").prepend(player());
     });

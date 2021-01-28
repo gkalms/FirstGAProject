@@ -44,14 +44,17 @@ router.get("/words/all", (request, response) => {
 
 //get words random
 router.get("/words/random", (request, response) => {
-  
   WordsApi.find().then((data) => {
-    let input = e.target.innerHTML;
-    const randomWords = words[input]; 
-    const randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
-    const randomWord = randomWords[randomIndex];
-    $("p").append(`${randomWord} `);
-  response.send(data);
+    response.send(data);
+
+    // Original randomizing code
+  //   let input = e.target.innerHTML;
+  //   const randomWords = words[input]; 
+  //   const randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
+  //   const randomWord = randomWords[randomIndex];
+  //   $("p").append(`${randomWord} `);
+
+
   }).catch((error) => {
     response.status(500).send("cannot upload words' list");
   });

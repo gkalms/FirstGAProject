@@ -1,4 +1,5 @@
 // Alphabet form
+
 const form = `
 <form id="alpha-play">
       <div id="alphabox">
@@ -48,22 +49,22 @@ const form = `
 console.log("form loaded");
 
 const player = () => {
-    $(document).on("submit", "#alpha-play", async (event) => {
-        event.preventDefault();
-        const response = await $.ajax({
-            type: "GET",
-            url: "/api/alphabet/words/random",
-            contentType: "application/json",
-            data: JSON.stringify(response),
-        });
-        console.log("response", response);
-        //   Clear text when Reset button clicked
-        $("document").on("click", "#clear", async (event) => {
-            event.preventDefault();
-            $("p").empty();
-        });
+  $(document).on("submit", "#alpha-play", async (event) => {
+    event.preventDefault();
+    // const response = await $.ajax({
+    //   type: "GET",
+    //   url: "/api/alphabet/words/random",
+    //   contentType: "application/json",
+    //   data: JSON.stringify(response),
+    // });
+    // console.log("response", response);
+    //   Clear text when Reset button clicked
+    $("document").on("click", "#clear", async (event) => {
+      event.preventDefault();
+      $("p").empty();
     });
-    return form;
+  });
+  return form;
 };
 
 export default player;

@@ -8,7 +8,7 @@ const alphabetRouter = require("./Routes/AlphaRoute");
 const userRouter = require("./Routes/UserRoute");
 
 // Connect to mongodb
-mongoose.connect("mongodb://localhost:27017/Elena-Project2", {
+mongoose.connect("mongodb://localhost:27017/Project2", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

@@ -7,10 +7,32 @@ const cors = require("cors");
 const alphabetRouter = require("./Routes/AlphaRoute");
 const userRouter = require("./Routes/UserRoute");
 
+// seeding alphabet and word data
+const AlphabetApi = require("./Models/AlphabetModel");
+const alphaSeed = require("./Models/alphabetseed");
+
 // Connect to mongodb
-mongoose.connect("mongodb://localhost:27017/Project2", {
+mongoose.connect("mongodb://localhost:27017/alphaseed", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function() {
+  // enter all alphabet letters
+AlphabetApi.create( alphaSeed, (err, data) => {
+  if (err) console.log(err.message)
+  console.log("added aplhabet categories")
+});
+// return number of alphabet letters = 26
+// AlphabetApi.count({} , (err , data)=> {
+//   if ( err ) console.log( err.message );
+//    console.log ( `There are ${data} aplhabet letters in this database` );
+// });
+    //we're connected!
+    console.log("Mongoose online")
 });
 
 // Initialise app object

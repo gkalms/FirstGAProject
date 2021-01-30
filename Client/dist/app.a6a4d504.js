@@ -945,13 +945,16 @@ console.log("form loaded");
 var player = function player() {
   $(document).on("submit", "#alpha-play", /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
+      var input, targetalphabet;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              event.preventDefault(); // const response = await $.ajax({
+              event.preventDefault();
+              input = e.target.innerHTML;
+              targetalphabet = words[input]; // const response = await $.ajax({
               //   type: "GET",
-              //   url: "/api/alphabet/words/random",
+              //   url: "/api/alphabet/words/target",
               //   contentType: "application/json",
               //   data: JSON.stringify(response),
               // });
@@ -980,7 +983,7 @@ var player = function player() {
                 };
               }());
 
-            case 2:
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -1136,7 +1139,8 @@ var Word = function Word() {
     return function (_x) {
       return _ref.apply(this, arguments);
     };
-  }());
+  }()); // update words
+
   $(document).on("click", "#update", /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
       var requestBody, response;
@@ -1152,7 +1156,7 @@ var Word = function Word() {
               _context2.next = 4;
               return $.ajax({
                 type: "PATCH",
-                url: "/api/alphabet/update-word/:id",
+                url: "/api/alphabet/update-word/".concat($("#word-Id").val()),
                 contentType: "application/json",
                 data: JSON.stringify(requestBody)
               });
@@ -1181,18 +1185,19 @@ var Word = function Word() {
           switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
-              _context3.next = 3;
+              console.log($("#word-Id").val());
+              _context3.next = 4;
               return $.ajax({
                 type: "DELETE",
-                url: "/api/alphabet/delete-word/:id",
+                url: "/api/alphabet/delete-word/".concat($("#word-Id").val()),
                 contentType: "application/json"
               });
 
-            case 3:
+            case 4:
               response = _context3.sent;
               window.alert("Word deleted!");
 
-            case 5:
+            case 6:
             case "end":
               return _context3.stop();
           }
@@ -1256,7 +1261,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49930" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50600" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

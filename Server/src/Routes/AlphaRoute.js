@@ -2,6 +2,7 @@ const express = require("express");
 const WordsApi = require("../Models/WordsModel");
 const AlphabetApi = require("../Models/AlphabetModel");
 
+
 const router = express.Router();
 
 //Create the alphabet category
@@ -33,7 +34,7 @@ router.post("/words", (request, response) => {
   });
 });
 
-//get words
+//get all words
 router.get("/words/all", (request, response) => {
   WordsApi.find().then((data) => {
     response.send(data);
@@ -42,28 +43,19 @@ router.get("/words/all", (request, response) => {
   });
 });
 
-//get words random
-router.get("/words/random", (request, response) => {
-  WordsApi.find().then((data) => {
-    response.send(data);
-
-    // Original randomizing code
-  //   let input = e.target.innerHTML;
-  //   const randomWords = words[input]; 
-  //   const randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
-  //   const randomWord = randomWords[randomIndex];
-  //   $("p").append(`${randomWord} `);
-
-
-  }).catch((error) => {
-    response.status(500).send("cannot upload words' list");
-  });
-});
+//get words by targetted alphabet 
+// router.get("/words/target", (request, response) => {
+//   WordsApi.find().then((data) => {
+//     response.send(data);
+//   }).catch((error) => {
+//     response.status(500).send("cannot upload words' list");
+//   });
+// });
 
 
 // update words
 router.patch("/update-word/:id", (request, response) => {
-  WordsModel.findByIdAndUpdate(request.params.id, request.body, {
+  WordsApi.findByIdAndUpdate(request.params.id, request.body, {
     new: true,
     upsert: true,
   })
@@ -80,7 +72,7 @@ router.patch("/update-word/:id", (request, response) => {
 
 // delete words
 router.delete("/delete-word/:id", (request, response) => {
-  WordsModel.findByIdAndDelete(request.params.id)
+  WordsApi.findByIdAndDelete(request.params.id)
     .then((data) => {
       console.log("Delete successful!");
       response.send(data);

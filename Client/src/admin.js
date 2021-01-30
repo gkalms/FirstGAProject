@@ -46,15 +46,17 @@ const Word = () => {
     });
     window.alert("Word created!")
   });
+  // update words
   $(document).on("click", "#update", async (e) => {
     e.preventDefault();
     const requestBody = {
       name: $("#name").val(),
-      categoryId: ($('#alphabet')).val()
+      categoryId: ($('#alphabet')).val(),
     };
+
     const response = await $.ajax({
       type: "PATCH",
-      url: "/api/alphabet/update-word/:id",
+      url: `/api/alphabet/update-word/${$("#word-Id").val()}`,
       contentType: "application/json",
       data: JSON.stringify(requestBody),
     });
@@ -62,9 +64,11 @@ const Word = () => {
   });
   $(document).on("click", "#delete", async (e) => {
     e.preventDefault();
+    console.log($("#word-Id").val());
+    
     const response = await $.ajax({
       type: "DELETE",
-      url: "/api/alphabet/delete-word/:id",
+      url: `/api/alphabet/delete-word/${$("#word-Id").val()}`,
       contentType: "application/json",
     });
     window.alert("Word deleted!")

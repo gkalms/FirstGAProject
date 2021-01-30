@@ -51,9 +51,11 @@ console.log("form loaded");
 const player = () => {
   $(document).on("submit", "#alpha-play", async (event) => {
     event.preventDefault();
+    let input = e.target.innerHTML;
+    const targetalphabet = words[input]; 
     // const response = await $.ajax({
     //   type: "GET",
-    //   url: "/api/alphabet/words/random",
+    //   url: "/api/alphabet/words/target",
     //   contentType: "application/json",
     //   data: JSON.stringify(response),
     // });

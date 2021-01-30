@@ -1,6 +1,6 @@
-[
+const alphaseed = [
     {
-        "name": "A",
+        "name": "A"
     },
     {
         "name": "B"
@@ -78,3 +78,5 @@
         "name": "Z"
     }
 ]
+
+module.exports = alphaseed;

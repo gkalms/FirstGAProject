@@ -45,16 +45,14 @@ router.get("/words/all", (request, response) => {
 
 //get words by targetted alphabet 
 router.get("/words/:alphabetId", (request, response) => {
-  WordsApi.findById(request.params.alphabetId)
   console.log("request params", request.params.alphabetId)
-  .then((data) => {
+  WordsApi.find({ alphabetId: request.params.alphabetId }).then((data) => {
+    console.log("this is the data I get back",data)
     response.send(data);
-    console.log("data", data);
   }).catch((error) => {
     response.status(500).send("cannot find words by alphabet category");
   });
 });
-
 
 // update words
 router.patch("/update-word/:id", (request, response) => {

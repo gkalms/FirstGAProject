@@ -44,13 +44,16 @@ router.get("/words/all", (request, response) => {
 });
 
 //get words by targetted alphabet 
-// router.get("/words/target", (request, response) => {
-//   WordsApi.find().then((data) => {
-//     response.send(data);
-//   }).catch((error) => {
-//     response.status(500).send("cannot upload words' list");
-//   });
-// });
+router.get("/words/:alphabetId", (request, response) => {
+  WordsApi.findById(request.params.alphabetId)
+  console.log("request params", request.params.alphabetId)
+  .then((data) => {
+    response.send(data);
+    console.log("data", data);
+  }).catch((error) => {
+    response.status(500).send("cannot find words by alphabet category");
+  });
+});
 
 
 // update words

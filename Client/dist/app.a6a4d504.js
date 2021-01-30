@@ -868,64 +868,6 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"src/loginUser.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var form = "\n<form id=\"login-user\">\n<style>\nbody {background-color: powderblue;}\nlabel   {color: blue;}\n.form-control {width: 300px;}\n</style>\n<h1>Admin login</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">User name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter Username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </div>\n</form>\n\n";
-
-var loginUser = function loginUser() {
-  $(document).on("submit", "#login-user", /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-      var formData, response;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              console.log("event", event);
-              event.preventDefault();
-              formData = {
-                name: $("input[name='username']").val(),
-                password: $("input[name='password']").val()
-              };
-              console.log("form data", formData);
-              _context.next = 6;
-              return $.ajax({
-                type: "POST",
-                url: "/api/user/login",
-                contentType: "application/json",
-                data: JSON.stringify(formData)
-              });
-
-            case 6:
-              response = _context.sent;
-              console.log("response", response);
-
-            case 8:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }());
-  return form;
-};
-
-var _default = loginUser;
-exports.default = _default;
 },{}],"src/player.js":[function(require,module,exports) {
 "use strict";
 
@@ -954,7 +896,7 @@ var player = function player() {
               input = e.target.innerHTML;
               targetalphabet = words[input]; // const response = await $.ajax({
               //   type: "GET",
-              //   url: "/api/alphabet/words/target",
+              //   url: "/api/alphabet/words/",
               //   contentType: "application/json",
               //   data: JSON.stringify(response),
               // });
@@ -1022,7 +964,16 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var homepageForm = "\n<form id=\"homepage\">\n<style>\nbody {background-color: powderblue;}\n</style>\n<h1>Admin login</h1>\n<div>\n<button type=\"button\" id=\"admin\" class=\"btn btn-primary\">Admin</button>\n</div>\n<div>\n<button type=\"button\" id=\"player\" class=\"btn btn-primary\">Player</button>\n</div>\n</form>\n"; // homepage form
+// Establish session
+$(document).ready(function () {
+  var response = $.ajax({
+    type: "GET",
+    url: "/api/user/session/establish",
+    contentType: "application/json"
+  });
+  alert("Session established");
+});
+var homepageForm = "\n<form id=\"homepage\">\n<style>\nbody {background-color: powderblue;}\n</style>\n<h1>Welcome</h1>\n<div>\n<button type=\"button\" id=\"admin\" class=\"btn btn-primary\">Admin</button>\n</div>\n<div>\n<button type=\"button\" id=\"play\" class=\"btn btn-primary\">Play</button>\n</div>\n<div>\n<button type=\"button\" id=\"exit\" class=\"btn btn-primary\">Exit</button>\n</div>\n</form>\n"; // homepage form
 
 var homePage = function homePage() {
   // On selecting Admin button - load Login form
@@ -1049,18 +1000,17 @@ var homePage = function homePage() {
     };
   }()); // On selecting Player button - load Player form
 
-  $(document).on("click", "#player", /*#__PURE__*/function () {
+  $(document).on("click", "#play", /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               event.preventDefault();
-              console.log("event is happening");
               $("body").empty();
               $("body").prepend((0, _player.default)());
 
-            case 4:
+            case 3:
             case "end":
               return _context2.stop();
           }
@@ -1070,6 +1020,39 @@ var homePage = function homePage() {
 
     return function (_x2) {
       return _ref2.apply(this, arguments);
+    };
+  }()); // Exit
+
+  $(document).on("click", "#exit", /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(event) {
+      var response;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              event.preventDefault();
+              _context3.next = 3;
+              return $.ajax({
+                // Expire session
+                type: "GET",
+                url: "/api/user/session/expire",
+                contentType: "application/json"
+              });
+
+            case 3:
+              response = _context3.sent;
+              alert("Session ended");
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
     };
   }());
   return homepageForm;
@@ -1087,11 +1070,18 @@ exports.default = void 0;
 
 var _regeneratorRuntime = require("regenerator-runtime");
 
+var _homepage = _interopRequireDefault(require("./homepage"));
+
+var _player = _interopRequireDefault(require("./player"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var form = "\n<form id=\"form-admin\">\n<div class=\"form-group\">\n    <label for=\"wordId\">(Update or delete word by Word ID)</label>\n    <input type=\"text\" class=\"form-control\" id=\"word-Id\" placeholder=\"Enter word Id\" name=\"wordId\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"name\">Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter new word\" name=\"word\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"alphaCategoryId\">Category</label>\n    <select name=\"categoryId\" id=\"alphabet\"></select>\n  </div>\n  <button type=\"submit\" id=\"create\" class=\"btn btn-primary\">Submit word</button>\n  <button type=\"submit\" id=\"update\" class=\"btn btn-primary\">Update word</button>\n  <button type=\"submit\" id=\"delete\" class=\"btn btn-primary\">Delete word</button>\n</form>\n";
+// Build homepage
+var form = "\n<form id=\"form-admin\">\n<div class=\"form-group\">\n    <label for=\"wordId\">(Update or delete word by Word ID)</label>\n    <input type=\"text\" class=\"form-control\" id=\"word-Id\" placeholder=\"Enter word Id\" name=\"wordId\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"name\">Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter new word\" name=\"word\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"alphaCategoryId\">Category</label>\n    <select name=\"categoryId\" id=\"alphabet\"></select>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"create\" class=\"btn btn-primary\">Submit word</button>\n  <button type=\"submit\" id=\"update\" class=\"btn btn-primary\">Update word</button>\n  <button type=\"submit\" id=\"delete\" class=\"btn btn-danger\">Delete word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"logout\" class=\"btn btn-danger\">Logout</button>\n  <button type=\"submit\" id=\"play\" class=\"btn btn-primary\">Play</button>\n\n  </div>\n</form>\n";
 
 var Word = function Word() {
   var categoryResponse = $.ajax({
@@ -1103,7 +1093,8 @@ var Word = function Word() {
       optionsHtml += "<option value=".concat(wordEl._id, ">").concat(wordEl.name, "</option>");
     });
     $('#alphabet').append(optionsHtml);
-  });
+  }); // Create
+
   $(document).on("click", "#create", /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
       var requestBody, response;
@@ -1139,7 +1130,7 @@ var Word = function Word() {
     return function (_x) {
       return _ref.apply(this, arguments);
     };
-  }()); // update words
+  }()); // Update words
 
   $(document).on("click", "#update", /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
@@ -1176,7 +1167,8 @@ var Word = function Word() {
     return function (_x2) {
       return _ref2.apply(this, arguments);
     };
-  }());
+  }()); // Delete
+
   $(document).on("click", "#delete", /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(e) {
       var response;
@@ -1185,19 +1177,18 @@ var Word = function Word() {
           switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
-              console.log($("#word-Id").val());
-              _context3.next = 4;
+              _context3.next = 3;
               return $.ajax({
                 type: "DELETE",
                 url: "/api/alphabet/delete-word/".concat($("#word-Id").val()),
                 contentType: "application/json"
               });
 
-            case 4:
+            case 3:
               response = _context3.sent;
               window.alert("Word deleted!");
 
-            case 6:
+            case 5:
             case "end":
               return _context3.stop();
           }
@@ -1208,13 +1199,157 @@ var Word = function Word() {
     return function (_x3) {
       return _ref3.apply(this, arguments);
     };
+  }()); // Logout
+
+  $(document).on("click", "#logout", /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(event) {
+      var response;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              event.preventDefault();
+              _context4.next = 3;
+              return $.ajax({
+                type: "GET",
+                url: "/api/user/logout",
+                contentType: "application/json"
+              });
+
+            case 3:
+              response = _context4.sent;
+              $("body").empty();
+              $("body").prepend(_homepage.default);
+
+            case 6:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }()); // Go direct to play
+
+  $(document).on("click", "#play", /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(event) {
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              event.preventDefault();
+              $("body").empty();
+              $("body").prepend((0, _player.default)());
+
+            case 3:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
+    };
   }());
   return form;
 };
 
 var _default = Word;
 exports.default = _default;
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js"}],"src/app.js":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./homepage":"src/homepage.js","./player":"src/player.js"}],"src/loginUser.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _admin = _interopRequireDefault(require("./admin"));
+
+var _homepage = _interopRequireDefault(require("./homepage"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+// Build login page
+var form = "\n<form id=\"login-user\">\n<style>\nbody {background-color: powderblue;}\nlabel   {color: blue;}\n.form-control {width: 300px;}\n</style>\n<h1>Admin login</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">User name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter Username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </div>\n  <div>\n    <button type=\"button\" id=\"exit\" class=\"btn btn-primary\">Exit</button>\n    </div>\n</form>\n"; // Log in
+
+var loginUser = function loginUser() {
+  $(document).on("submit", "#login-user", /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+      var formData, response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              formData = {
+                name: $("input[name='username']").val(),
+                password: $("input[name='password']").val()
+              };
+              console.log("form data", formData);
+              _context.next = 5;
+              return $.ajax({
+                type: "POST",
+                url: "/api/user/login",
+                contentType: "application/json",
+                data: JSON.stringify(formData)
+              });
+
+            case 5:
+              response = _context.sent;
+              $("body").empty();
+              $("body").prepend((0, _admin.default)());
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }()); // Exit
+
+  $(document).on("click", "#exit", /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              event.preventDefault();
+              $("body").empty();
+              $("body").prepend((0, _homepage.default)());
+
+            case 3:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }());
+  return form;
+};
+
+var _default = loginUser;
+exports.default = _default;
+},{"./admin":"src/admin.js","./homepage":"src/homepage.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
 require("regenerator-runtime/runtime");
@@ -1231,8 +1366,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // $("body").prepend(loginUser());
 // $("body").prepend(player());
-// $("body").prepend(homePage());
-$("body").prepend((0, _admin.default)());
+$("body").prepend((0, _homepage.default)()); // $("body").prepend(Word());
+// Establish session
+
+var response = $.ajax({
+  type: "GET",
+  url: "/api/user/session/establish",
+  contentType: "application/json"
+});
 },{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./loginUser":"src/loginUser.js","./player":"src/player.js","./homepage":"src/homepage.js","./admin":"src/admin.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1261,7 +1402,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50600" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56537" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -27,11 +27,11 @@ AlphabetApi.create( alphaSeed, (err, data) => {
   console.log("added aplhabet categories")
 });
 // return number of alphabet letters = 26
-// AlphabetApi.count({} , (err , data)=> {
-//   if ( err ) console.log( err.message );
-//    console.log ( `There are ${data} aplhabet letters in this database` );
-// });
-    //we're connected!
+AlphabetApi.count({} , (err , data)=> {
+  if ( err ) console.log( err.message );
+   console.log ( `There are ${data} aplhabet letters in this database` );
+});
+    // connected!
     console.log("Mongoose online")
 });
 

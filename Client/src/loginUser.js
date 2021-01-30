@@ -1,3 +1,8 @@
+// Import dependent pages
+import Word from "./admin";
+import homePage from "./homepage";
+
+// Build login page
 const form = `
 <form id="login-user">
 <style>
@@ -17,13 +22,15 @@ label   {color: blue;}
     <div>
   <button type="submit" class="btn btn-primary">Submit</button>
   </div>
+  <div>
+    <button type="button" id="exit" class="btn btn-primary">Exit</button>
+    </div>
 </form>
-
 `;
 
+// Log in
 const loginUser = () => {
     $(document).on("submit", "#login-user", async (event) => {
-        console.log("event", event);
         event.preventDefault();
 
         const formData = {
@@ -37,7 +44,14 @@ const loginUser = () => {
             contentType: "application/json",
             data: JSON.stringify(formData),
         });
-        console.log("response", response);
+        $("body").empty();
+        $("body").prepend(Word());
+    });
+    // Exit
+    $(document).on("click", "#exit", async (event) => {
+        event.preventDefault();
+        $("body").empty();
+        $("body").prepend(homePage());
     });
     return form;
 };

@@ -55,7 +55,7 @@ const player = () => {
     const targetalphabet = words[input]; 
     // const response = await $.ajax({
     //   type: "GET",
-    //   url: "/api/alphabet/words/target",
+    //   url: "/api/alphabet/words/",
     //   contentType: "application/json",
     //   data: JSON.stringify(response),
     // });

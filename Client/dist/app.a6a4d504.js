@@ -946,243 +946,13 @@ var player = function player() {
 
 var _default = player;
 exports.default = _default;
-},{}],"src/registerUser.js":[function(require,module,exports) {
+},{}],"src/admin.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
-var _admin = _interopRequireDefault(require("./admin"));
-
-var _homepage = _interopRequireDefault(require("./homepage"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-// Build login page
-var form = "\n<form id=\"register-user\">\n<h1>Admin login</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">User name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter Username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </div>\n  <div>\n    <button type=\"button\" id=\"exit\" class=\"btn btn-primary\">Exit</button>\n    </div>\n</form>\n"; // Register Admin users
-
-var registerUser = function registerUser() {
-  $(document).on("submit", "#register-user", /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-      var formData, response;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              event.preventDefault();
-              formData = {
-                name: $("input[name='username']").val(),
-                password: $("input[name='password']").val()
-              };
-              console.log("form data", formData);
-              _context.next = 5;
-              return $.ajax({
-                type: "POST",
-                url: "/api/user/register",
-                contentType: "application/json",
-                data: JSON.stringify(formData)
-              });
-
-            case 5:
-              response = _context.sent;
-              alert("User registered");
-
-            case 7:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }()); // Exit
-
-  $(document).on("click", "#exit", /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              event.preventDefault();
-              $("body").empty();
-              $("body").prepend((0, _homepage.default)());
-
-            case 3:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }());
-  return form;
-};
-
-var _default = registerUser;
-exports.default = _default;
-},{"./admin":"src/admin.js","./homepage":"src/homepage.js"}],"src/homepage.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-require("regenerator-runtime/runtime");
-
-var _regeneratorRuntime = require("regenerator-runtime");
-
-var _loginUser = _interopRequireDefault(require("./loginUser"));
-
-var _player = _interopRequireDefault(require("./player"));
-
-var _registerUser = _interopRequireDefault(require("./registerUser"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-// Establish session
-$(document).ready(function () {
-  var response = $.ajax({
-    type: "GET",
-    url: "/api/user/session/establish",
-    contentType: "application/json"
-  });
-});
-var homepageForm = "\n<form id=\"homepage\">\n<h1>WELCOME</h1>\n<div>\n<button type=\"button\" id=\"register\" class=\"btn btn-primary\">Register</button>\n</div>\n<div>\n<button type=\"button\" id=\"admin\" class=\"btn btn-primary\">Admin</button>\n</div>\n<div>\n<button type=\"button\" id=\"play\" class=\"btn btn-primary\">Play</button>\n</div>\n<div>\n<button type=\"button\" id=\"exit\" class=\"btn btn-primary\">Exit</button>\n</div>\n</form>\n"; // homepage form
-
-var homePage = function homePage() {
-  // On selecting Register button - load register user form
-  $(document).on("click", "#register", /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              event.preventDefault();
-              $("body").empty();
-              $("body").prepend((0, _registerUser.default)());
-
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }()); // On selecting Admin button - load Login form
-
-  $(document).on("click", "#admin", /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              event.preventDefault();
-              $("body").empty();
-              $("body").prepend((0, _loginUser.default)());
-
-            case 3:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }()); // On selecting Player button - load Player form
-
-  $(document).on("click", "#play", /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(event) {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              event.preventDefault();
-              $("body").empty();
-              $("body").prepend((0, _player.default)());
-
-            case 3:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }));
-
-    return function (_x3) {
-      return _ref3.apply(this, arguments);
-    };
-  }()); // Exit
-
-  $(document).on("click", "#exit", /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(event) {
-      var response;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              event.preventDefault();
-              _context4.next = 3;
-              return $.ajax({
-                // Expire session
-                type: "GET",
-                url: "/api/user/session/expire",
-                contentType: "application/json"
-              });
-
-            case 3:
-              response = _context4.sent;
-
-            case 4:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }));
-
-    return function (_x4) {
-      return _ref4.apply(this, arguments);
-    };
-  }());
-  return homepageForm;
-};
-
-var _default = homePage;
-exports.default = _default;
-},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./loginUser":"src/loginUser.js","./player":"src/player.js","./registerUser":"src/registerUser.js"}],"src/admin.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _regeneratorRuntime = require("regenerator-runtime");
 
 var _homepage = _interopRequireDefault(require("./homepage"));
 
@@ -1194,8 +964,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// Build homepage
-var form = "\n<form id=\"form-admin\">\n<div class=\"form-group\">\n    <label for=\"wordId\">(Update or delete word by Word ID)</label>\n    <input type=\"text\" class=\"form-control\" id=\"word-Id\" placeholder=\"Enter word Id\" name=\"wordId\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"name\">Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter new word\" name=\"word\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"alphaCategoryId\">Category</label>\n    <select name=\"categoryId\" id=\"alphabet\"></select>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"create\" class=\"btn btn-primary\">Submit word</button>\n  <button type=\"submit\" id=\"update\" class=\"btn btn-primary\">Update word</button>\n  <button type=\"submit\" id=\"delete\" class=\"btn btn-danger\">Delete word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"logout\" class=\"btn btn-danger\">Logout</button>\n  <button type=\"submit\" id=\"play\" class=\"btn btn-primary\">Play</button>\n\n  </div>\n</form>\n";
+// Form to create, update or delete words
+var form = "\n<form id=\"form-admin\">\n<div class=\"form-group\">\n    <label for=\"wordId\">(Update or delete word by Word ID)</label>\n    <input type=\"text\" class=\"form-control\" id=\"word-Id\" placeholder=\"Enter word Id\" name=\"wordId\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"name\">Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter new word\" name=\"word\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"alphaCategoryId\">Category</label>\n    <select name=\"categoryId\" id=\"alphabet\"></select>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"create\" class=\"btn btn-primary\">Submit word</button>\n  <button type=\"submit\" id=\"update\" class=\"btn btn-primary\">Update word</button>\n  <button type=\"submit\" id=\"delete\" class=\"btn btn-danger\">Delete word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"logout\" class=\"btn btn-danger\">Logout</button>\n  <button type=\"submit\" id=\"play\" class=\"btn btn-primary\">Play</button>\n  </div>\n</form>\n";
 
 var Word = function Word() {
   var categoryResponse = $.ajax({
@@ -1207,7 +977,7 @@ var Word = function Word() {
       optionsHtml += "<option value=".concat(wordEl._id, ">").concat(wordEl.name, "</option>");
     });
     $('#alphabet').append(optionsHtml);
-  }); // Create
+  }); // Create words
 
   $(document).on("click", "#create", /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
@@ -1281,7 +1051,7 @@ var Word = function Word() {
     return function (_x2) {
       return _ref2.apply(this, arguments);
     };
-  }()); // Delete
+  }()); // Delete words
 
   $(document).on("click", "#delete", /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(e) {
@@ -1346,7 +1116,7 @@ var Word = function Word() {
     return function (_x4) {
       return _ref4.apply(this, arguments);
     };
-  }()); // Go direct to play
+  }()); // Go to Play form
 
   $(document).on("click", "#play", /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(event) {
@@ -1375,7 +1145,7 @@ var Word = function Word() {
 
 var _default = Word;
 exports.default = _default;
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./homepage":"src/homepage.js","./player":"src/player.js"}],"src/loginUser.js":[function(require,module,exports) {
+},{"./homepage":"src/homepage.js","./player":"src/player.js"}],"src/loginUser.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1394,7 +1164,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 // Build login page
-var form = "\n<form id=\"login-user\">\n<style>\nbody {background-color: powderblue;}\nlabel   {color: blue;}\n.form-control {width: 300px;}\n</style>\n<h1>Admin login</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">User name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter Username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </div>\n  <div>\n    <button type=\"button\" id=\"exit-login\" class=\"btn btn-primary\">Exit</button>\n    </div>\n</form>\n"; // Log in
+var form = "\n<form id=\"login-user\">\n<h1>Log in</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">User name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter Username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </div>\n</form>\n"; // Log in
 
 var loginUser = function loginUser() {
   $(document).on("submit", "#login-user", /*#__PURE__*/function () {
@@ -1409,7 +1179,7 @@ var loginUser = function loginUser() {
                 name: $("input[name='username']").val(),
                 password: $("input[name='password']").val()
               };
-              console.log("form data", formData);
+              _context.prev = 2;
               _context.next = 5;
               return $.ajax({
                 type: "POST",
@@ -1421,9 +1191,147 @@ var loginUser = function loginUser() {
             case 5:
               response = _context.sent;
               $("body").empty();
-              $("body").prepend((0, _admin.default)());
+              $("body").append((0, _admin.default)());
+              _context.next = 15;
+              break;
 
-            case 8:
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](2);
+              window.alert("Unable to log you in!");
+              $("body").empty();
+              $("body").append((0, _homepage.default)());
+
+            case 15:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[2, 10]]);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+  return form;
+};
+
+var _default = loginUser;
+exports.default = _default;
+},{"./admin":"src/admin.js","./homepage":"src/homepage.js"}],"src/registerUser.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _loginUser = _interopRequireDefault(require("./loginUser"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+// Build registration page
+var form = "\n<form id=\"register-user\">\n<h1>Registration</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">Register name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Register Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </div>\n</form>\n"; // Register Admin users
+
+var registerUser = function registerUser() {
+  $(document).on("submit", "#register-user", /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+      var registrationData, response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              registrationData = {
+                name: $("input[name='username']").val(),
+                password: $("input[name='password']").val()
+              };
+              _context.prev = 2;
+              _context.next = 5;
+              return $.ajax({
+                type: "POST",
+                url: "/api/user/register",
+                contentType: "application/json",
+                data: JSON.stringify(registrationData)
+              });
+
+            case 5:
+              response = _context.sent;
+              $("body").empty();
+              $("body").prepend((0, _loginUser.default)());
+              _context.next = 13;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](2);
+              window.alert("Sorry, Unable to register you!");
+
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[2, 10]]);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+  return form;
+};
+
+var _default = registerUser;
+exports.default = _default;
+},{"./loginUser":"src/loginUser.js"}],"src/homepage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _registerUser = _interopRequireDefault(require("./registerUser"));
+
+var _loginUser = _interopRequireDefault(require("./loginUser"));
+
+var _player = _interopRequireDefault(require("./player"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+// Establish session
+$(document).ready(function () {
+  var response = $.ajax({
+    type: "GET",
+    url: "/api/user/session/establish",
+    contentType: "application/json"
+  });
+});
+var homepageForm = "\n<form id=\"homepage\">\n<h1>WELCOME</h1>\n<div>\n<button type=\"button\" id=\"register\" class=\"btn btn-primary\">Register</button>\n</div>\n<div>\n<button type=\"button\" id=\"login\" class=\"btn btn-primary\">Login</button>\n</div>\n<div>\n<button type=\"button\" id=\"play\" class=\"btn btn-primary\">Play</button>\n</div>\n<div>\n<button type=\"button\" id=\"exit\" class=\"btn btn-primary\">Exit</button>\n</div>\n</form>\n"; // homepage form
+
+var homePage = function homePage() {
+  // On selecting button - load register user form
+  $(document).on("click", "#register", /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              $("body").empty();
+              $("body").append((0, _registerUser.default)());
+
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -1434,9 +1342,9 @@ var loginUser = function loginUser() {
     return function (_x) {
       return _ref.apply(this, arguments);
     };
-  }()); // Exit
+  }()); // On selecting button - load Login form
 
-  $(document).on("click", "#exit-login", /*#__PURE__*/function () {
+  $(document).on("click", "#login", /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
@@ -1444,7 +1352,7 @@ var loginUser = function loginUser() {
             case 0:
               event.preventDefault();
               $("body").empty();
-              $("body").prepend((0, _homepage.default)());
+              $("body").append((0, _loginUser.default)());
 
             case 3:
             case "end":
@@ -1457,34 +1365,81 @@ var loginUser = function loginUser() {
     return function (_x2) {
       return _ref2.apply(this, arguments);
     };
+  }()); // On selecting button - load Player form
+
+  $(document).on("click", "#play", /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(event) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              event.preventDefault();
+              $("body").empty();
+              $("body").append((0, _player.default)());
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }()); // Exit
+
+  $(document).on("click", "#exit", /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(event) {
+      var response;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              event.preventDefault();
+              _context4.next = 3;
+              return $.ajax({
+                // Expire session
+                type: "GET",
+                url: "/api/user/session/expire",
+                contentType: "application/json"
+              });
+
+            case 3:
+              response = _context4.sent;
+              window.alert("Session ended!");
+
+            case 5:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
+    };
   }());
-  return form;
+  return homepageForm;
 };
 
-var _default = loginUser;
+var _default = homePage;
 exports.default = _default;
-},{"./admin":"src/admin.js","./homepage":"src/homepage.js"}],"src/app.js":[function(require,module,exports) {
+},{"./registerUser":"src/registerUser.js","./loginUser":"src/loginUser.js","./player":"src/player.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
 require("regenerator-runtime/runtime");
 
-var _loginUser = _interopRequireDefault(require("./loginUser"));
-
-var _player = _interopRequireDefault(require("./player"));
+var _regeneratorRuntime = require("regenerator-runtime");
 
 var _homepage = _interopRequireDefault(require("./homepage"));
 
-var _admin = _interopRequireDefault(require("./admin"));
-
-var _registerUser = _interopRequireDefault(require("./registerUser"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// $("body").prepend(registerUser());
-// $("body").prepend(loginUser());
-// $("body").prepend(player());
-$("body").prepend((0, _homepage.default)()); // $("body").prepend(Word());
-},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./loginUser":"src/loginUser.js","./player":"src/player.js","./homepage":"src/homepage.js","./admin":"src/admin.js","./registerUser":"src/registerUser.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+$("body").prepend((0, _homepage.default)());
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./homepage":"src/homepage.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1512,7 +1467,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51374" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52219" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

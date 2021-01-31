@@ -1,9 +1,8 @@
 // Import dependent forms
-import { async } from "regenerator-runtime";
 import homePage from "./homepage";
 import player from "./player"
 
-// Build homepage
+// Form to create, update or delete words
 const form = `
 <form id="form-admin">
 <div class="form-group">
@@ -26,7 +25,6 @@ const form = `
   <div>
   <button type="submit" id="logout" class="btn btn-danger">Logout</button>
   <button type="submit" id="play" class="btn btn-primary">Play</button>
-
   </div>
 </form>
 `;
@@ -42,7 +40,8 @@ const Word = () => {
     })
     $('#alphabet').append(optionsHtml);
   });
-  // Create
+
+  // Create words
   $(document).on("click", "#create", async (e) => {
     e.preventDefault();
     const requestBody = {
@@ -57,6 +56,7 @@ const Word = () => {
     });
     window.alert("Word created!")
   });
+
   // Update words
   $(document).on("click", "#update", async (e) => {
     e.preventDefault();
@@ -72,7 +72,8 @@ const Word = () => {
     });
     window.alert("Word updated!")
   });
-  // Delete
+
+  // Delete words
   $(document).on("click", "#delete", async (e) => {
     e.preventDefault();
     const response = await $.ajax({
@@ -82,6 +83,7 @@ const Word = () => {
     });
     window.alert("Word deleted!")
   });
+
   // Logout
     $(document).on("click", "#logout", async (event) => {
         event.preventDefault();
@@ -93,7 +95,8 @@ const Word = () => {
         $("body").empty();
         $("body").prepend((homePage));
       });
-  // Go direct to play
+
+  // Go to Play form
   $(document).on("click", "#play", async (event) => {
     event.preventDefault();
     $("body").empty();

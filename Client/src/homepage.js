@@ -7,11 +7,10 @@ $(document).ready(function () {
     });
 });
 
-import "regenerator-runtime/runtime";
-import { async } from "regenerator-runtime";
+import registerUser from "./registerUser";
 import loginUser from "./loginUser";
 import player from "./player";
-import RegisterUser from "./registerUser";
+
 
 const homepageForm = `
 <form id="homepage">
@@ -20,7 +19,7 @@ const homepageForm = `
 <button type="button" id="register" class="btn btn-primary">Register</button>
 </div>
 <div>
-<button type="button" id="admin" class="btn btn-primary">Admin</button>
+<button type="button" id="login" class="btn btn-primary">Login</button>
 </div>
 <div>
 <button type="button" id="play" class="btn btn-primary">Play</button>
@@ -33,23 +32,23 @@ const homepageForm = `
 
 // homepage form
 const homePage = () => {
-    // On selecting Register button - load register user form
+    // On selecting button - load register user form
     $(document).on("click", "#register", async (event) => {
         event.preventDefault();
         $("body").empty();
-        $("body").prepend(RegisterUser());
+        $("body").append(registerUser());
     });
-    // On selecting Admin button - load Login form
-    $(document).on("click", "#admin", async (event) => {
+    // On selecting button - load Login form
+    $(document).on("click", "#login", async (event) => {
         event.preventDefault();
         $("body").empty();
-        $("body").prepend(loginUser());
+        $("body").append(loginUser());
     });
-    // On selecting Player button - load Player form
+    // On selecting button - load Player form
     $(document).on("click", "#play", async (event) => {
         event.preventDefault();
         $("body").empty();
-        $("body").prepend(player());
+        $("body").append(player());
     });
     // Exit
     $(document).on("click", "#exit", async (event) => {
@@ -60,6 +59,7 @@ const homePage = () => {
             url: "/api/user/session/expire",
             contentType: "application/json",
         });
+        window.alert("Session ended!");
     });
     return homepageForm;
 };

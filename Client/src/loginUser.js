@@ -5,12 +5,7 @@ import homePage from "./homepage";
 // Build login page
 const form = `
 <form id="login-user">
-<style>
-body {background-color: powderblue;}
-label   {color: blue;}
-.form-control {width: 300px;}
-</style>
-<h1>Admin login</h1>
+<h1>Log in</h1>
     <div class="form-group">
     <label for="username">User name</label>
     <input type="text" class="form-control" placeholder="Please Enter Username" name="username">
@@ -22,9 +17,6 @@ label   {color: blue;}
     <div>
   <button type="submit" class="btn btn-primary">Submit</button>
   </div>
-  <div>
-    <button type="button" id="exit-login" class="btn btn-primary">Exit</button>
-    </div>
 </form>
 `;
 
@@ -32,26 +24,24 @@ label   {color: blue;}
 const loginUser = () => {
     $(document).on("submit", "#login-user", async (event) => {
         event.preventDefault();
-
         const formData = {
             name: $("input[name='username']").val(),
             password: $("input[name='password']").val(),
         };
-        console.log("form data", formData);
-        const response = await $.ajax({
-            type: "POST",
-            url: "/api/user/login",
-            contentType: "application/json",
-            data: JSON.stringify(formData),
-        });
-        $("body").empty();
-        $("body").prepend(Word());
-    });
-    // Exit
-    $(document).on("click", "#exit-login", async (event) => {
-        event.preventDefault();
-        $("body").empty();
-        $("body").prepend(homePage());
+        try {
+            const response = await $.ajax({
+                type: "POST",
+                url: "/api/user/login",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+            });
+            $("body").empty();
+            $("body").append(Word());
+        } catch (err) {
+            window.alert("Unable to log you in!");
+            $("body").empty();
+            $("body").append(homePage());
+        }
     });
     return form;
 };

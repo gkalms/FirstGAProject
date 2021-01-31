@@ -4,7 +4,7 @@ const form = `
 <form id="alpha-play">
       <div id="alphabox">
         <div class="row">
-        <button class="btn btn-info" value="A">A</button>
+        <button class="btn btn-info" id="A">A</button>
         <button class="btn btn-info" value="B">B</button>
         <button class="btn btn-info" value="C">C</button>
         <button class="btn btn-info" value="D">D</button>
@@ -49,17 +49,20 @@ const form = `
 console.log("form loaded");
 
 const player = () => {
-  $(document).on("submit", "#alpha-play", async (event) => {
+  $(document).on("click", "#A", async (event) => {
     event.preventDefault();
-    let input = e.target.innerHTML;
-    const targetalphabet = words[input]; 
-    // const response = await $.ajax({
-    //   type: "GET",
-    //   url: "/api/alphabet/words/",
-    //   contentType: "application/json",
-    //   data: JSON.stringify(response),
-    // });
-    // console.log("response", response);
+
+    // let input = e.target.innerHTML;
+
+    const response = await $.ajax({
+      type: "GET",
+      url: "/api/alphabet/words/all",
+      contentType: "application/json",
+      data: JSON.stringify(response),
+    });
+    console.log("response", response);
+    // $("p").append(response);
+
     //   Clear text when Reset button clicked
     $("document").on("click", "#clear", async (event) => {
       event.preventDefault();

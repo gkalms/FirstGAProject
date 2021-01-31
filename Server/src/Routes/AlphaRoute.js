@@ -43,16 +43,40 @@ router.get("/words/all", (request, response) => {
   });
 });
 
-//get words by targetted alphabet 
+//get words by targetted alphabet ID
 router.get("/words/:alphabetId", (request, response) => {
   console.log("request params", request.params.alphabetId)
   WordsApi.find({ alphabetId: request.params.alphabetId }).then((data) => {
-    console.log("this is the data I get back",data)
+    console.log("this is the data I get back", data)
     response.send(data);
   }).catch((error) => {
-    response.status(500).send("cannot find words by alphabet category");
+    response.status(500).send("cannot find words by alphabet ID");
   });
 });
+
+//get by targetted alphabet name 
+router.get("/alphabet/:name", (request, response) => {
+  console.log("request params", request.params.name)
+  AlphabetApi.find({ name: request.params.name }).then((data) => {
+    console.log("this is the data I get back", data)
+    response.send(data);
+  }).catch((error) => {
+    response.status(500).send("cannot find by alphabet letter");
+  });
+});
+
+//get by targetted word 
+router.get("/words/:name", (request, response) => {
+  console.log("request params", request.params.name)
+  WordsApi.find({ name: request.params.name }).then((data) => {
+    console.log("this is the data I get back", data)
+    response.send(data);
+  }).catch((error) => {
+    response.status(500).send("cannot find word");
+  });
+});
+
+
 
 // update words
 router.patch("/update-word/:id", (request, response) => {

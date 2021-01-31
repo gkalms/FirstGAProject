@@ -1,8 +1,3 @@
-import { async } from "regenerator-runtime";
-import "regenerator-runtime/runtime";
-import loginUser from "./loginUser";
-import player from "./player";
-
 // Establish session
 $(document).ready(function () {
     const response = $.ajax({
@@ -10,15 +5,20 @@ $(document).ready(function () {
         url: "/api/user/session/establish",
         contentType: "application/json",
     });
-    alert("Session established");
 });
+
+import "regenerator-runtime/runtime";
+import { async } from "regenerator-runtime";
+import loginUser from "./loginUser";
+import player from "./player";
+import RegisterUser from "./registerUser";
 
 const homepageForm = `
 <form id="homepage">
-<style>
-body {background-color: powderblue;}
-</style>
-<h1>Welcome</h1>
+<h1>WELCOME</h1>
+<div>
+<button type="button" id="register" class="btn btn-primary">Register</button>
+</div>
 <div>
 <button type="button" id="admin" class="btn btn-primary">Admin</button>
 </div>
@@ -33,6 +33,12 @@ body {background-color: powderblue;}
 
 // homepage form
 const homePage = () => {
+    // On selecting Register button - load register user form
+    $(document).on("click", "#register", async (event) => {
+        event.preventDefault();
+        $("body").empty();
+        $("body").prepend(RegisterUser());
+    });
     // On selecting Admin button - load Login form
     $(document).on("click", "#admin", async (event) => {
         event.preventDefault();
@@ -54,7 +60,6 @@ const homePage = () => {
             url: "/api/user/session/expire",
             contentType: "application/json",
         });
-    alert("Session ended");
     });
     return homepageForm;
 };

@@ -5,7 +5,7 @@ const wordsSchema = mongoose.Schema({
     alphabetId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "alphabet"
-    }
+    },
 });
 
 module.exports = mongoose.model("word", wordsSchema);

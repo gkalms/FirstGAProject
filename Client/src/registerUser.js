@@ -4,12 +4,7 @@ import homePage from "./homepage";
 
 // Build login page
 const form = `
-<form id="login-user">
-<style>
-body {background-color: powderblue;}
-label   {color: blue;}
-.form-control {width: 300px;}
-</style>
+<form id="register-user">
 <h1>Admin login</h1>
     <div class="form-group">
     <label for="username">User name</label>
@@ -23,14 +18,14 @@ label   {color: blue;}
   <button type="submit" class="btn btn-primary">Submit</button>
   </div>
   <div>
-    <button type="button" id="exit-login" class="btn btn-primary">Exit</button>
+    <button type="button" id="exit" class="btn btn-primary">Exit</button>
     </div>
 </form>
 `;
 
-// Log in
-const loginUser = () => {
-    $(document).on("submit", "#login-user", async (event) => {
+// Register Admin users
+const registerUser = () => {
+    $(document).on("submit", "#register-user", async (event) => {
         event.preventDefault();
 
         const formData = {
@@ -40,15 +35,14 @@ const loginUser = () => {
         console.log("form data", formData);
         const response = await $.ajax({
             type: "POST",
-            url: "/api/user/login",
+            url: "/api/user/register",
             contentType: "application/json",
             data: JSON.stringify(formData),
         });
-        $("body").empty();
-        $("body").prepend(Word());
+        alert("User registered");
     });
     // Exit
-    $(document).on("click", "#exit-login", async (event) => {
+    $(document).on("click", "#exit", async (event) => {
         event.preventDefault();
         $("body").empty();
         $("body").prepend(homePage());
@@ -56,4 +50,4 @@ const loginUser = () => {
     return form;
 };
 
-export default loginUser;
+export default registerUser;

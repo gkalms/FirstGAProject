@@ -973,9 +973,10 @@ var Word = function Word() {
               e.preventDefault();
               requestBody = {
                 name: $("#name").val(),
-                categoryId: $('#alphabet').val()
+                alphabetId: $('#alphabet-list').val()
               };
-              _context.next = 4;
+              console.log(requestBody);
+              _context.next = 5;
               return $.ajax({
                 type: "POST",
                 url: "/api/alphabet/words",
@@ -983,11 +984,11 @@ var Word = function Word() {
                 data: JSON.stringify(requestBody)
               });
 
-            case 4:
+            case 5:
               response = _context.sent;
               window.alert("Word created!");
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -1427,7 +1428,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65388" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59928" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

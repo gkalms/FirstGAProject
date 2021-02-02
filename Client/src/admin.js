@@ -51,8 +51,9 @@ const Word = () => {
     e.preventDefault();
     const requestBody = {
       name: $("#name").val(),
-      categoryId: ($('#alphabet')).val(),
+      alphabetId: $('#alphabet-list').val(),
     };
+    console.log(requestBody);
     const response = await $.ajax({
       type: "POST",
       url: "/api/alphabet/words",

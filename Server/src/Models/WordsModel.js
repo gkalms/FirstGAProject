@@ -4,7 +4,7 @@ const wordsSchema = mongoose.Schema({
     name: String,
     alphabetId: {
         type:mongoose.Schema.Types.ObjectId,
-        ref: "alphabet"
+        ref: "alphabet",
     },
 });
 

@@ -51,7 +51,7 @@ const Word = () => {
     e.preventDefault();
     const requestBody = {
       name: $("#name").val(),
-      categoryId: ($('#alphabet')).val()
+      categoryId: ($('#alphabet')).val(),
     };
     const response = await $.ajax({
       type: "POST",

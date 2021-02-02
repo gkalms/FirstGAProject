@@ -24,25 +24,26 @@ router.get("/alphabet/all", (request, response) => {
   });
 });
 
+//get all words
+router.get("/words/all", (request, response) => {
+  WordsApi.find()
+  .populate("alphabetId")
+  .then((data) => {
+  response.send(data);
+  })
+  .catch((error) => {
+    response.status(500).send("unable to query words list");
+  });
+});
+
 // create words
 router.post("/words", (request, response) => {
   const requestBody = request.body;
   WordsApi.create(requestBody).then((data) => {
-    
-    response.send(data);
-  }).catch(() => {
-    response.status(500).send("unable to create the word");
-  });
-});
-
-//get all words
-router.get("/words/all", (request, response) => {
-  WordsApi.find()
-  .populate('alphabetId')
-  .then((data) => {
-  response.send(data);
+    console.log(data);
+    response.send("Word added successfully");
   }).catch((error) => {
-    response.status(500).send("cannot upload words' list");
+    response.status(500).send("unable to create the word");
   });
 });
 
@@ -50,7 +51,6 @@ router.get("/words/all", (request, response) => {
 router.get("/words/:alphabetId", (request, response) => {
   console.log("request params", request.params.alphabetId)
   WordsApi.find({ alphabetId: request.params.alphabetId }).then((data) => {
-    console.log("this is the data I get back", data)
     response.send(data);
   }).catch((error) => {
     response.status(500).send("cannot find words by alphabet ID");

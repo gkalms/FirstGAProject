@@ -875,8 +875,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-// Alphabet form
-var form = "\n<form id=\"alpha-play\">\n<h1>Hi Elena</h1>\n<h2></h2>\n      <div id=\"alphabox\">\n        <div class=\"row\">\n        <button class=\"btn btn-info\" value=\"A\">A</button>\n        <button class=\"btn btn-info\" value=\"B\">B</button>\n        <button class=\"btn btn-info\" value=\"C\">C</button>\n        <button class=\"btn btn-info\" value=\"D\">D</button>\n        <button class=\"btn btn-info\" value=\"E\">E</button>\n        <button class=\"btn btn-info\" value=\"F\">F</button>\n        <button class=\"btn btn-info\" value=\"G\">G</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-success\" value=\"H\">H</button>\n        <button class=\"btn btn-success\" value=\"I\">I</button>\n        <button class=\"btn btn-success\" value=\"J\">J</button>\n        <button class=\"btn btn-success\" value=\"K\">K</button>\n        <button class=\"btn btn-success\" value=\"L\">L</button>\n        <button class=\"btn btn-success\" value=\"M\">M</button>\n        <button class=\"btn btn-success\" value=\"N\">N</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-warning\" value=\"O\">O</button>\n        <button class=\"btn btn-warning\" value=\"P\">P</button>\n        <button class=\"btn btn-warning\" value=\"Q\">Q</button>\n        <button class=\"btn btn-warning\" value=\"R\">R</button>\n        <button class=\"btn btn-warning\" value=\"S\">S</button>\n        <button class=\"btn btn-warning\" value=\"T\">T</button>\n        <button class=\"btn btn-warning\" value=\"U\">U</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-danger\" value=\"V\">V</button>\n        <button class=\"btn btn-danger\" value=\"W\">W</button>\n        <button class=\"btn btn-danger\" value=\"X\">X</button>\n        <button class=\"btn btn-danger\" value=\"Y\">Y</button>\n        <button class=\"btn btn-danger\" value=\"Z\">Z</button>\n        <button class=\"btn-secondary\" id=\"clear\">Clear</button>\n        <button class=\"btn-secondary\" id=\"exit\">Exit</button>\n        </div>\n      </div>\n        <p></p>\n      </div>\n</form>\n";
 var words = {
   A: ["apple", "ant", "ape", "antelope", "animals"],
   B: ["boy", "bee", "biscuit", "bat", "bath", "ball"],
@@ -904,32 +902,28 @@ var words = {
   X: ["xavier", "xylophone", "xanadu"],
   Y: ["yellow", "y.o.l.o", "yes", "yeah", "year", "your"],
   Z: ["zero", "zoo", "zebra", "zebu cow", "zimbambwe", "zack"]
-}; //Day of the week
+}; // Alphabet form
 
-var d = new Date();
-$("h2").html("Today is the " + d.toLocaleDateString());
+var form = "\n<form id=\"alpha-play\">\n<h1>Alphabet</h1>\n      <div id=\"alphabox\">\n        <div class=\"row\">\n        <button class=\"btn btn-info\" value=\"A\">A</button>\n        <button class=\"btn btn-info\" value=\"B\">B</button>\n        <button class=\"btn btn-info\" value=\"C\">C</button>\n        <button class=\"btn btn-info\" value=\"D\">D</button>\n        <button class=\"btn btn-info\" value=\"E\">E</button>\n        <button class=\"btn btn-info\" value=\"F\">F</button>\n        <button class=\"btn btn-info\" value=\"G\">G</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-success\" value=\"H\">H</button>\n        <button class=\"btn btn-success\" value=\"I\">I</button>\n        <button class=\"btn btn-success\" value=\"J\">J</button>\n        <button class=\"btn btn-success\" value=\"K\">K</button>\n        <button class=\"btn btn-success\" value=\"L\">L</button>\n        <button class=\"btn btn-success\" value=\"M\">M</button>\n        <button class=\"btn btn-success\" value=\"N\">N</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-warning\" value=\"O\">O</button>\n        <button class=\"btn btn-warning\" value=\"P\">P</button>\n        <button class=\"btn btn-warning\" value=\"Q\">Q</button>\n        <button class=\"btn btn-warning\" value=\"R\">R</button>\n        <button class=\"btn btn-warning\" value=\"S\">S</button>\n        <button class=\"btn btn-warning\" value=\"T\">T</button>\n        <button class=\"btn btn-warning\" value=\"U\">U</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-danger\" value=\"V\">V</button>\n        <button class=\"btn btn-danger\" value=\"W\">W</button>\n        <button class=\"btn btn-danger\" value=\"X\">X</button>\n        <button class=\"btn btn-danger\" value=\"Y\">Y</button>\n        <button class=\"btn btn-danger\" value=\"Z\">Z</button>\n        <button class=\"btn-secondary\" id=\"clear\">Clear</button>\n        <button class=\"btn-secondary\" id=\"quit\">Quit</button>\n        </div>\n      </div>\n        <p></p>\n      </div>\n</form>\n";
 
 var player = function player() {
   //Get words from alphabet object
   $(".btn").on("click", function (e) {
-    console.log("button clicked"); //Clear pre-existing text
-
     $("p").html("");
-    console.log("all clear!");
     var input = e.target.innerHTML;
-    console.log(input);
     var randomWords = words[input];
-    console.log("random words", randomWords);
     var randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
-    console.log(randomIndex);
     var randomWord = randomWords[randomIndex];
-    console.log(randomWord);
     $("p").append("".concat(randomWord, " "));
   }); //   Clear the text
 
   $("#clear").on("click", function () {
-    console.log("clear this field!");
     $("p").html("");
+  }); // Exit
+
+  $(document).on("click", function () {
+    // $("body").empty();
+    $("body").prepend(homePage);
   });
   return form;
 };
@@ -1390,12 +1384,11 @@ exports.default = _default;
 
 require("regenerator-runtime/runtime");
 
-var _regeneratorRuntime = require("regenerator-runtime");
-
 var _homepage = _interopRequireDefault(require("./homepage"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import { async } from "regenerator-runtime";
 $("body").prepend((0, _homepage.default)()); // Establish session
 
 $(document).ready(function () {
@@ -1406,7 +1399,7 @@ $(document).ready(function () {
   });
   window.alert("Session started!");
 });
-},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./homepage":"src/homepage.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./homepage":"src/homepage.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1434,7 +1427,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60837" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61307" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

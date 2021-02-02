@@ -12,7 +12,7 @@ const AlphabetApi = require("./Models/AlphabetModel");
 const alphaSeed = require("./Models/alphabetseed");
 
 // Connect to mongodb
-mongoose.connect("mongodb://localhost:27017/Demo2Feb", {
+mongoose.connect("mongodb://localhost:27017/DemoDay", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

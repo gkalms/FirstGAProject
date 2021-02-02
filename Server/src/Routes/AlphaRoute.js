@@ -28,6 +28,7 @@ router.get("/alphabet/all", (request, response) => {
 router.post("/words", (request, response) => {
   const requestBody = request.body;
   WordsApi.create(requestBody).then((data) => {
+    
     response.send(data);
   }).catch(() => {
     response.status(500).send("unable to create the word");
@@ -36,8 +37,10 @@ router.post("/words", (request, response) => {
 
 //get all words
 router.get("/words/all", (request, response) => {
-  WordsApi.find().then((data) => {
-    response.send(data);
+  WordsApi.find()
+  .populate('alphabetId')
+  .then((data) => {
+  response.send(data);
   }).catch((error) => {
     response.status(500).send("cannot upload words' list");
   });

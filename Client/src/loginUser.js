@@ -15,7 +15,7 @@ const form = `
     <input type="password" class="form-control" placeholder="Please Enter Password" name="password">
     </div>
     <div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" id="submit">Submit</button>
   </div>
 </form>
 `;

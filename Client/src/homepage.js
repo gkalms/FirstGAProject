@@ -1,12 +1,3 @@
-// Establish session
-$(document).ready(function () {
-    const response = $.ajax({
-        type: "GET",
-        url: "/api/user/session/establish",
-        contentType: "application/json",
-    });
-});
-
 import registerUser from "./registerUser";
 import loginUser from "./loginUser";
 import player from "./player";
@@ -25,10 +16,11 @@ const homepageForm = `
 <button type="button" id="play" class="btn btn-primary">Play</button>
 </div>
 <div>
-<button type="button" id="exit" class="btn btn-primary">Exit</button>
+<button type="submit" id="logout" class="btn btn-danger">Logout</button>
 </div>
 </form>
 `;
+
 
 // homepage form
 const homePage = () => {
@@ -50,10 +42,15 @@ const homePage = () => {
         $("body").empty();
         $("body").append(player());
     });
-    // Exit
-    $(document).on("click", "#exit", async (event) => {
+    // Logout
+    $(document).on("click", "#logout", async (event) => {
         event.preventDefault();
         const response = await $.ajax({
+            type: "GET",
+            url: "/api/user/logout",
+            contentType: "application/json",
+        });
+        const response2 = await $.ajax({
             // Expire session
             type: "GET",
             url: "/api/user/session/expire",

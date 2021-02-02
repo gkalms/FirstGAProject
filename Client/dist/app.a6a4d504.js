@@ -875,72 +875,62 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 // Alphabet form
-var form = "\n<form id=\"alpha-play\">\n      <div id=\"alphabox\">\n        <div class=\"row\">\n        <button class=\"btn btn-info\" id=\"A\">A</button>\n        <button class=\"btn btn-info\" value=\"B\">B</button>\n        <button class=\"btn btn-info\" value=\"C\">C</button>\n        <button class=\"btn btn-info\" value=\"D\">D</button>\n        <button class=\"btn btn-info\" value=\"E\">E</button>\n        <button class=\"btn btn-info\" value=\"F\">F</button>\n        <button class=\"btn btn-info\" value=\"G\">G</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-success\" value=\"H\">H</button>\n        <button class=\"btn btn-success\" value=\"I\">I</button>\n        <button class=\"btn btn-success\" value=\"J\">J</button>\n        <button class=\"btn btn-success\" value=\"K\">K</button>\n        <button class=\"btn btn-success\" value=\"L\">L</button>\n        <button class=\"btn btn-success\" value=\"M\">M</button>\n        <button class=\"btn btn-success\" value=\"N\">N</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-warning\" value=\"O\">O</button>\n        <button class=\"btn btn-warning\" value=\"P\">P</button>\n        <button class=\"btn btn-warning\" value=\"Q\">Q</button>\n        <button class=\"btn btn-warning\" value=\"R\">R</button>\n        <button class=\"btn btn-warning\" value=\"S\">S</button>\n        <button class=\"btn btn-warning\" value=\"T\">T</button>\n        <button class=\"btn btn-warning\" value=\"U\">U</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn-secondary\" id=\"freestyle\">:-)</button>\n        <button class=\"btn btn-danger\" value=\"V\">V</button>\n        <button class=\"btn btn-danger\" value=\"W\">W</button>\n        <button class=\"btn btn-danger\" value=\"X\">X</button>\n        <button class=\"btn btn-danger\" value=\"Y\">Y</button>\n        <button class=\"btn btn-danger\" value=\"Z\">Z</button>\n        <button class=\"btn-secondary\" id=\"clear\">Reset</button>\n        </div>\n      </div>\n      <div id=\"inputbox\">\n        <p></p>\n      </div>\n</form>\n";
-console.log("form loaded");
+var form = "\n<form id=\"alpha-play\">\n<h1>Hi Elena</h1>\n<h2></h2>\n      <div id=\"alphabox\">\n        <div class=\"row\">\n        <button class=\"btn btn-info\" value=\"A\">A</button>\n        <button class=\"btn btn-info\" value=\"B\">B</button>\n        <button class=\"btn btn-info\" value=\"C\">C</button>\n        <button class=\"btn btn-info\" value=\"D\">D</button>\n        <button class=\"btn btn-info\" value=\"E\">E</button>\n        <button class=\"btn btn-info\" value=\"F\">F</button>\n        <button class=\"btn btn-info\" value=\"G\">G</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-success\" value=\"H\">H</button>\n        <button class=\"btn btn-success\" value=\"I\">I</button>\n        <button class=\"btn btn-success\" value=\"J\">J</button>\n        <button class=\"btn btn-success\" value=\"K\">K</button>\n        <button class=\"btn btn-success\" value=\"L\">L</button>\n        <button class=\"btn btn-success\" value=\"M\">M</button>\n        <button class=\"btn btn-success\" value=\"N\">N</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-warning\" value=\"O\">O</button>\n        <button class=\"btn btn-warning\" value=\"P\">P</button>\n        <button class=\"btn btn-warning\" value=\"Q\">Q</button>\n        <button class=\"btn btn-warning\" value=\"R\">R</button>\n        <button class=\"btn btn-warning\" value=\"S\">S</button>\n        <button class=\"btn btn-warning\" value=\"T\">T</button>\n        <button class=\"btn btn-warning\" value=\"U\">U</button>\n        </div>\n        <div class=\"row\">\n        <button class=\"btn btn-danger\" value=\"V\">V</button>\n        <button class=\"btn btn-danger\" value=\"W\">W</button>\n        <button class=\"btn btn-danger\" value=\"X\">X</button>\n        <button class=\"btn btn-danger\" value=\"Y\">Y</button>\n        <button class=\"btn btn-danger\" value=\"Z\">Z</button>\n        <button class=\"btn-secondary\" id=\"clear\">Clear</button>\n        <button class=\"btn-secondary\" id=\"exit\">Exit</button>\n        </div>\n      </div>\n        <p></p>\n      </div>\n</form>\n";
+var words = {
+  A: ["apple", "ant", "ape", "antelope", "animals"],
+  B: ["boy", "bee", "biscuit", "bat", "bath", "ball"],
+  C: ["cat", "chicken", "cheese", "cow", "crayon", "car"],
+  D: ["dog", "dinosaur", "doll", "daddy", "dragon", "drink"],
+  E: ["emu", "eye", "eskimo", "elephant", "egg"],
+  F: ["father", "fly", "fun", "fish”,fox”,”fur"],
+  G: ["grandma", "granddad", "goat", "gorrila", "girl", "goose"],
+  H: ["happy", "hen", "hat", "hug", "ham", "hot"],
+  I: ["ice", "icecream", "Iceland", "idea", "inside"],
+  J: ["jump", "juice”,”jack”, ”join”, ”jeans”, ”judge"],
+  K: ["kite", "kick", "king", "knee", "kind", "kettle"],
+  L: ["Lemon", "lizard", "lion", "lily", "leaf", "look"],
+  M: ["moose", "mouse", "milk", "middle", "maple", "mine"],
+  N: ["news", "nine", "near", "neck", "nose", "nice"],
+  O: ["owl", "open", "oh oh", "ouch", "orange", "over"],
+  P: ["please", "plant", "peace", "pour", "play", "park"],
+  Q: ["Queen", "Quail", "quasimodo", "quarter"],
+  R: ["rose", "rice", "rain", "rabbit", "read", "roof"],
+  S: ["snake", "snail", "snow", "shoe", "sugar", "sweet"],
+  T: ["tiger", "teddy bear", "tea", "tom", "tail", "tall"],
+  U: ["umbrella", "uncle", "under", "use", "uruguay", "ugly"],
+  V: ["very", "volvo", "volkswagen", "velvet", "virginia"],
+  W: ["whale", "why", "where", "what", "walk", "wash"],
+  X: ["xavier", "xylophone", "xanadu"],
+  Y: ["yellow", "y.o.l.o", "yes", "yeah", "year", "your"],
+  Z: ["zero", "zoo", "zebra", "zebu cow", "zimbambwe", "zack"]
+}; //Day of the week
+
+var d = new Date();
+$("h2").html("Today is the " + d.toLocaleDateString());
 
 var player = function player() {
-  $(document).on("click", "#A", /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-      var response;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              event.preventDefault(); // let input = e.target.innerHTML;
+  //Get words from alphabet object
+  $(".btn").on("click", function (e) {
+    console.log("button clicked"); //Clear pre-existing text
 
-              _context2.next = 3;
-              return $.ajax({
-                type: "GET",
-                url: "/api/alphabet/words/all",
-                contentType: "application/json",
-                data: JSON.stringify(response)
-              });
+    $("p").html("");
+    console.log("all clear!");
+    var input = e.target.innerHTML;
+    console.log(input);
+    var randomWords = words[input];
+    console.log("random words", randomWords);
+    var randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
+    console.log(randomIndex);
+    var randomWord = randomWords[randomIndex];
+    console.log(randomWord);
+    $("p").append("".concat(randomWord, " "));
+  }); //   Clear the text
 
-            case 3:
-              response = _context2.sent;
-              console.log("response", response); // $("p").append(response);
-              //   Clear text when Reset button clicked
-
-              $("document").on("click", "#clear", /*#__PURE__*/function () {
-                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-                  return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                      switch (_context.prev = _context.next) {
-                        case 0:
-                          event.preventDefault();
-                          $("p").empty();
-
-                        case 2:
-                        case "end":
-                          return _context.stop();
-                      }
-                    }
-                  }, _callee);
-                }));
-
-                return function (_x2) {
-                  return _ref2.apply(this, arguments);
-                };
-              }());
-
-            case 6:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }());
+  $("#clear").on("click", function () {
+    console.log("clear this field!");
+    $("p").html("");
+  });
   return form;
 };
 
@@ -965,7 +955,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 // Form to create, update or delete words
-var form = "\n<form id=\"form-admin\">\n<div class=\"form-group\">\n    <label for=\"wordId\">(Update or delete word by Word ID)</label>\n    <input type=\"text\" class=\"form-control\" id=\"word-Id\" placeholder=\"Enter word Id\" name=\"wordId\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"name\">Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter new word\" name=\"word\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"alphaCategoryId\">Category</label>\n    <select name=\"categoryId\" id=\"alphabet\"></select>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"create\" class=\"btn btn-primary\">Submit word</button>\n  <button type=\"submit\" id=\"update\" class=\"btn btn-primary\">Update word</button>\n  <button type=\"submit\" id=\"delete\" class=\"btn btn-danger\">Delete word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"logout\" class=\"btn btn-danger\">Logout</button>\n  <button type=\"submit\" id=\"play\" class=\"btn btn-primary\">Play</button>\n  </div>\n</form>\n";
+var form = "\n<form id=\"form-admin\">\n<h1>Shape words</h1>\n<div class=\"form-group\">\n    <label for=\"wordId\">(Update or delete word by Word ID)</label>\n    <input type=\"text\" class=\"form-control\" id=\"word-Id\" placeholder=\"Enter word Id\" name=\"wordId\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"name\">Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter new word\" name=\"word\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"alphaCategoryId\">Category</label>\n    <select name=\"categoryId\" id=\"alphabet\"></select>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"create\" class=\"btn btn-primary\">Submit word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"update\" class=\"btn btn-primary\">Update word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"delete\" class=\"btn btn-danger\">Delete word</button>\n  </div>\n  <div>\n<button type=\"button\" id=\"exit\" class=\"btn btn-primary\">Exit</button>\n</div>\n \n</form>\n";
 
 var Word = function Word() {
   var categoryResponse = $.ajax({
@@ -1083,29 +1073,19 @@ var Word = function Word() {
     return function (_x3) {
       return _ref3.apply(this, arguments);
     };
-  }()); // Logout
+  }()); // Exit
 
-  $(document).on("click", "#logout", /*#__PURE__*/function () {
+  $(document).on("click", "#exit", /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(event) {
-      var response;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               event.preventDefault();
-              _context4.next = 3;
-              return $.ajax({
-                type: "GET",
-                url: "/api/user/logout",
-                contentType: "application/json"
-              });
-
-            case 3:
-              response = _context4.sent;
               $("body").empty();
               $("body").prepend(_homepage.default);
 
-            case 6:
+            case 3:
             case "end":
               return _context4.stop();
           }
@@ -1115,29 +1095,6 @@ var Word = function Word() {
 
     return function (_x4) {
       return _ref4.apply(this, arguments);
-    };
-  }()); // Go to Play form
-
-  $(document).on("click", "#play", /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(event) {
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              event.preventDefault();
-              $("body").empty();
-              $("body").prepend((0, _player.default)());
-
-            case 3:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      }, _callee5);
-    }));
-
-    return function (_x5) {
-      return _ref5.apply(this, arguments);
     };
   }());
   return form;
@@ -1164,7 +1121,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 // Build login page
-var form = "\n<form id=\"login-user\">\n<h1>Log in</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">User name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter Username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </div>\n</form>\n"; // Log in
+var form = "\n<form id=\"login-user\">\n<h1>Log in</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">User name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter Username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\" id=\"submit\">Submit</button>\n  </div>\n</form>\n"; // Log in
 
 var loginUser = function loginUser() {
   $(document).on("submit", "#login-user", /*#__PURE__*/function () {
@@ -1236,7 +1193,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 // Build registration page
-var form = "\n<form id=\"register-user\">\n<h1>Registration</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">Register name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Register Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </div>\n</form>\n"; // Register Admin users
+var form = "\n<form id=\"register-user\">\n<h1>Registration</h1>\n    <div class=\"form-group\">\n    <label for=\"username\">Register name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Please Enter username\" name=\"username\">\n    </div>\n    <div class=\"form-group\">\n    <label for=\"password\">Register Password</label>\n    <input type=\"password\" class=\"form-control\" placeholder=\"Please Enter Password\" name=\"password\">\n    </div>\n    <div>\n  <button type=\"submit\" class=\"btn btn-primary\" id=\"submit\">Submit</button>\n  </div>\n</form>\n"; // Register Admin users
 
 var registerUser = function registerUser() {
   $(document).on("submit", "#register-user", /*#__PURE__*/function () {
@@ -1309,15 +1266,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// Establish session
-$(document).ready(function () {
-  var response = $.ajax({
-    type: "GET",
-    url: "/api/user/session/establish",
-    contentType: "application/json"
-  });
-});
-var homepageForm = "\n<form id=\"homepage\">\n<h1>WELCOME</h1>\n<div>\n<button type=\"button\" id=\"register\" class=\"btn btn-primary\">Register</button>\n</div>\n<div>\n<button type=\"button\" id=\"login\" class=\"btn btn-primary\">Login</button>\n</div>\n<div>\n<button type=\"button\" id=\"play\" class=\"btn btn-primary\">Play</button>\n</div>\n<div>\n<button type=\"button\" id=\"exit\" class=\"btn btn-primary\">Exit</button>\n</div>\n</form>\n"; // homepage form
+var homepageForm = "\n<form id=\"homepage\">\n<h1>WELCOME</h1>\n<div>\n<button type=\"button\" id=\"register\" class=\"btn btn-primary\">Register</button>\n</div>\n<div>\n<button type=\"button\" id=\"login\" class=\"btn btn-primary\">Login</button>\n</div>\n<div>\n<button type=\"button\" id=\"play\" class=\"btn btn-primary\">Play</button>\n</div>\n<div>\n<button type=\"submit\" id=\"logout\" class=\"btn btn-danger\">Logout</button>\n</div>\n</form>\n"; // homepage form
 
 var homePage = function homePage() {
   // On selecting button - load register user form
@@ -1388,11 +1337,11 @@ var homePage = function homePage() {
     return function (_x3) {
       return _ref3.apply(this, arguments);
     };
-  }()); // Exit
+  }()); // Logout
 
-  $(document).on("click", "#exit", /*#__PURE__*/function () {
+  $(document).on("click", "#logout", /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(event) {
-      var response;
+      var response, response2;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
@@ -1400,17 +1349,26 @@ var homePage = function homePage() {
               event.preventDefault();
               _context4.next = 3;
               return $.ajax({
+                type: "GET",
+                url: "/api/user/logout",
+                contentType: "application/json"
+              });
+
+            case 3:
+              response = _context4.sent;
+              _context4.next = 6;
+              return $.ajax({
                 // Expire session
                 type: "GET",
                 url: "/api/user/session/expire",
                 contentType: "application/json"
               });
 
-            case 3:
-              response = _context4.sent;
+            case 6:
+              response2 = _context4.sent;
               window.alert("Session ended!");
 
-            case 5:
+            case 8:
             case "end":
               return _context4.stop();
           }
@@ -1438,7 +1396,16 @@ var _homepage = _interopRequireDefault(require("./homepage"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-$("body").prepend((0, _homepage.default)());
+$("body").prepend((0, _homepage.default)()); // Establish session
+
+$(document).ready(function () {
+  var response = $.ajax({
+    type: "GET",
+    url: "/api/user/session/establish",
+    contentType: "application/json"
+  });
+  window.alert("Session started!");
+});
 },{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./homepage":"src/homepage.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1467,7 +1434,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52219" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58649" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

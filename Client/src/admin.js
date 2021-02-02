@@ -5,6 +5,7 @@ import player from "./player"
 // Form to create, update or delete words
 const form = `
 <form id="form-admin">
+<h1>Shape words</h1>
 <div class="form-group">
     <label for="wordId">(Update or delete word by Word ID)</label>
     <input type="text" class="form-control" id="word-Id" placeholder="Enter word Id" name="wordId">
@@ -19,13 +20,17 @@ const form = `
   </div>
   <div>
   <button type="submit" id="create" class="btn btn-primary">Submit word</button>
+  </div>
+  <div>
   <button type="submit" id="update" class="btn btn-primary">Update word</button>
+  </div>
+  <div>
   <button type="submit" id="delete" class="btn btn-danger">Delete word</button>
   </div>
   <div>
-  <button type="submit" id="logout" class="btn btn-danger">Logout</button>
-  <button type="submit" id="play" class="btn btn-primary">Play</button>
-  </div>
+<button type="button" id="exit" class="btn btn-primary">Exit</button>
+</div>
+ 
 </form>
 `;
 
@@ -54,7 +59,7 @@ const Word = () => {
       contentType: "application/json",
       data: JSON.stringify(requestBody),
     });
-    window.alert("Word created!")
+    window.alert("Word created!");
   });
 
   // Update words
@@ -70,7 +75,7 @@ const Word = () => {
       contentType: "application/json",
       data: JSON.stringify(requestBody),
     });
-    window.alert("Word updated!")
+    window.alert("Word updated!");
   });
 
   // Delete words
@@ -81,27 +86,15 @@ const Word = () => {
       url: `/api/alphabet/delete-word/${$("#word-Id").val()}`,
       contentType: "application/json",
     });
-    window.alert("Word deleted!")
+    window.alert("Word deleted!");
   });
 
-  // Logout
-    $(document).on("click", "#logout", async (event) => {
-        event.preventDefault();
-        const response = await $.ajax({
-            type: "GET",
-            url: "/api/user/logout",
-            contentType: "application/json",
-        });
-        $("body").empty();
-        $("body").prepend((homePage));
-      });
-
-  // Go to Play form
-  $(document).on("click", "#play", async (event) => {
+  // Exit
+  $(document).on("click", "#exit", async (event) => {
     event.preventDefault();
     $("body").empty();
-    $("body").prepend(player());
-});
+    $("body").prepend((homePage));
+  });
   return form;
 };
 

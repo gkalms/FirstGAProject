@@ -16,7 +16,7 @@ const form = `
   </div>
   <div class="form-group">
     <label for="alphaCategoryId">Category</label>
-    <select name="categoryId" id="alphabet"></select>
+    <select name="categoryId" id="alphabet-list"></select>
   </div>
   <div>
   <button type="submit" id="create" class="btn btn-primary">Submit word</button>
@@ -43,7 +43,7 @@ const Word = () => {
     alphaCategories.forEach((wordEl) => {
       optionsHtml += `<option value=${wordEl._id}>${wordEl.name}</option>`;
     })
-    $('#alphabet').append(optionsHtml);
+    $('#alphabet-list').append(optionsHtml);
   });
 
   // Create words

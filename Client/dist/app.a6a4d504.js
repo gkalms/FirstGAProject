@@ -949,7 +949,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 // Form to create, update or delete words
-var form = "\n<form id=\"form-admin\">\n<h1>Shape words</h1>\n<div class=\"form-group\">\n    <label for=\"wordId\">(Update or delete word by Word ID)</label>\n    <input type=\"text\" class=\"form-control\" id=\"word-Id\" placeholder=\"Enter word Id\" name=\"wordId\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"name\">Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter new word\" name=\"word\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"alphaCategoryId\">Category</label>\n    <select name=\"categoryId\" id=\"alphabet\"></select>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"create\" class=\"btn btn-primary\">Submit word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"update\" class=\"btn btn-primary\">Update word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"delete\" class=\"btn btn-danger\">Delete word</button>\n  </div>\n  <div>\n<button type=\"button\" id=\"exit\" class=\"btn btn-primary\">Exit</button>\n</div>\n \n</form>\n";
+var form = "\n<form id=\"form-admin\">\n<h1>Shape words</h1>\n<div class=\"form-group\">\n    <label for=\"wordId\">(Update or delete word by Word ID)</label>\n    <input type=\"text\" class=\"form-control\" id=\"word-Id\" placeholder=\"Enter word Id\" name=\"wordId\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"name\">Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter new word\" name=\"word\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"alphaCategoryId\">Category</label>\n    <select name=\"categoryId\" id=\"alphabet-list\"></select>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"create\" class=\"btn btn-primary\">Submit word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"update\" class=\"btn btn-primary\">Update word</button>\n  </div>\n  <div>\n  <button type=\"submit\" id=\"delete\" class=\"btn btn-danger\">Delete word</button>\n  </div>\n  <div>\n<button type=\"button\" id=\"exit\" class=\"btn btn-primary\">Exit</button>\n</div>\n \n</form>\n";
 
 var Word = function Word() {
   var categoryResponse = $.ajax({
@@ -960,7 +960,7 @@ var Word = function Word() {
     alphaCategories.forEach(function (wordEl) {
       optionsHtml += "<option value=".concat(wordEl._id, ">").concat(wordEl.name, "</option>");
     });
-    $('#alphabet').append(optionsHtml);
+    $('#alphabet-list').append(optionsHtml);
   }); // Create words
 
   $(document).on("click", "#create", /*#__PURE__*/function () {

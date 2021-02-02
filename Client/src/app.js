@@ -1,12 +1,15 @@
 import "regenerator-runtime/runtime";
+// import { async } from "regenerator-runtime";
 
-import loginUser from "./loginUser";
-import player from "./player";
 import homePage from "./homepage";
-
-// $("body").prepend(loginUser());
-// $("body").prepend(player());
 $("body").prepend(homePage());
 
-
-  
+  // Establish session
+$(document).ready(function () {
+    const response = $.ajax({
+        type: "GET",
+        url: "/api/user/session/establish",
+        contentType: "application/json",
+    });
+    window.alert("Session started!");
+});

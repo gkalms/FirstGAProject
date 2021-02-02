@@ -1,11 +1,11 @@
+// Import dependent pages
+import Word from "./admin";
+import homePage from "./homepage";
+
+// Build login page
 const form = `
 <form id="login-user">
-<style>
-body {background-color: powderblue;}
-label   {color: blue;}
-.form-control {width: 300px;}
-</style>
-<h1>Admin login</h1>
+<h1>Log in</h1>
     <div class="form-group">
     <label for="username">User name</label>
     <input type="text" class="form-control" placeholder="Please Enter Username" name="username">
@@ -15,29 +15,33 @@ label   {color: blue;}
     <input type="password" class="form-control" placeholder="Please Enter Password" name="password">
     </div>
     <div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" id="submit">Submit</button>
   </div>
 </form>
-
 `;
 
+// Log in
 const loginUser = () => {
     $(document).on("submit", "#login-user", async (event) => {
-        console.log("event", event);
         event.preventDefault();
-
         const formData = {
-            username: $("input[name='username']").val(),
+            name: $("input[name='username']").val(),
             password: $("input[name='password']").val(),
         };
-        console.log("form data", formData);
-        const response = await $.ajax({
-            type: "POST",
-            url: "/api/user/login",
-            contentType: "application/json",
-            data: JSON.stringify(formData),
-        });
-        console.log("response", response);
+        try {
+            const response = await $.ajax({
+                type: "POST",
+                url: "/api/user/login",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+            });
+            $("body").empty();
+            $("body").append(Word());
+        } catch (err) {
+            window.alert("Unable to log you in!");
+            $("body").empty();
+            $("body").append(homePage());
+        }
     });
     return form;
 };

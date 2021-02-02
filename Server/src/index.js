@@ -7,11 +7,28 @@ const cors = require("cors");
 const alphabetRouter = require("./Routes/AlphaRoute");
 const userRouter = require("./Routes/UserRoute");
 
+// seeding alphabet and word data
+const AlphabetApi = require("./Models/AlphabetModel");
+const alphaSeed = require("./Models/alphabetseed");
+
 // Connect to mongodb
-mongoose.connect("mongodb://localhost:27017/Elena-Project2", {
+mongoose.connect("mongodb://localhost:27017/DemoDay", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+const db = mongoose.connection;
+
+// db.on('error', console.error.bind(console, 'connection error'));
+// db.on('open', function () {
+//   // enter all alphabet letters
+//   AlphabetApi.create(alphaSeed, (err, data) => {
+//     if (err) console.log(err.message)
+//     console.log("added aplhabet categories")
+//   });
+//   // connected!
+//   console.log("Mongoose online")
+// });
 
 // Initialise app object
 const app = express();

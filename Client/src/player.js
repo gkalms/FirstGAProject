@@ -1,6 +1,36 @@
+const words = {
+  A: ["apple", "ant", "ape", "antelope", "animals"],
+  B: ["boy", "bee", "biscuit", "bat", "bath", "ball"],
+  C: ["cat", "chicken", "cheese", "cow", "crayon", "car"],
+  D: ["dog", "dinosaur", "doll", "daddy", "dragon", "drink"],
+  E: ["emu", "eye", "eskimo", "elephant", "egg"],
+  F: ["father", "fly", "fun", "fish”,fox”,”fur"],
+  G: ["grandma", "granddad", "goat", "gorrila", "girl", "goose"],
+  H: ["happy", "hen", "hat", "hug", "ham", "hot"],
+  I: ["ice", "icecream", "Iceland", "idea", "inside"],
+  J: ["jump", "juice”,”jack”, ”join”, ”jeans”, ”judge"],
+  K: ["kite", "kick", "king", "knee", "kind", "kettle"],
+  L: ["Lemon", "lizard", "lion", "lily", "leaf", "look"],
+  M: ["moose", "mouse", "milk", "middle", "maple", "mine"],
+  N: ["news", "nine", "near", "neck", "nose", "nice"],
+  O: ["owl", "open", "oh oh", "ouch", "orange", "over"],
+  P: ["please", "plant", "peace", "pour", "play", "park"],
+  Q: ["Queen", "Quail", "quasimodo", "quarter"],
+  R: ["rose", "rice", "rain", "rabbit", "read", "roof"],
+  S: ["snake", "snail", "snow", "shoe", "sugar", "sweet"],
+  T: ["tiger", "teddy bear", "tea", "tom", "tail", "tall"],
+  U: ["umbrella", "uncle", "under", "use", "uruguay", "ugly"],
+  V: ["very", "volvo", "volkswagen", "velvet", "virginia"],
+  W: ["whale", "why", "where", "what", "walk", "wash"],
+  X: ["xavier", "xylophone", "xanadu"],
+  Y: ["yellow", "y.o.l.o", "yes", "yeah", "year", "your"],
+  Z: ["zero", "zoo", "zebra", "zebu cow", "zimbambwe", "zack"]
+};
+
 // Alphabet form
 const form = `
 <form id="alpha-play">
+<h1>Alphabet</h1>
       <div id="alphabox">
         <div class="row">
         <button class="btn btn-info" value="A">A</button>
@@ -30,40 +60,40 @@ const form = `
         <button class="btn btn-warning" value="U">U</button>
         </div>
         <div class="row">
-        <button class="btn-secondary" id="freestyle">:-)</button>
         <button class="btn btn-danger" value="V">V</button>
         <button class="btn btn-danger" value="W">W</button>
         <button class="btn btn-danger" value="X">X</button>
         <button class="btn btn-danger" value="Y">Y</button>
         <button class="btn btn-danger" value="Z">Z</button>
-        <button class="btn-secondary" id="clear">Reset</button>
+        <button class="btn-secondary" id="clear">Clear</button>
+        <button class="btn-secondary" id="quit">Quit</button>
         </div>
       </div>
-      <div id="inputbox">
         <p></p>
       </div>
 </form>
 `;
 
-console.log("form loaded");
-
 const player = () => {
-    $(document).on("submit", "#alpha-play", async (event) => {
-        event.preventDefault();
-        const response = await $.ajax({
-            type: "GET",
-            url: "/api/alphabet/words/random",
-            contentType: "application/json",
-            data: JSON.stringify(response),
-        });
-        console.log("response", response);
-        //   Clear text when Reset button clicked
-        $("document").on("click", "#clear", async (event) => {
-            event.preventDefault();
-            $("p").empty();
-        });
-    });
-    return form;
+  //Get words from alphabet object
+  $(".btn").on("click", (e) => {
+    $("p").html("");
+    let input = e.target.innerHTML;
+    const randomWords = words[input];
+    const randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
+    const randomWord = randomWords[randomIndex];
+    $("p").append(`${randomWord} `);
+  });
+  //   Clear the text
+  $("#clear").on("click", () => {
+    $("p").html("");
+  });
+   // Exit
+   $(document).on("click", () => {
+    // $("body").empty();
+    $("body").prepend((homePage));
+});
+  return form;
 };
 
 export default player;

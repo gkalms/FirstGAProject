@@ -2,6 +2,7 @@ const express = require("express");
 const WordsApi = require("../Models/WordsModel");
 const AlphabetApi = require("../Models/AlphabetModel");
 
+
 const router = express.Router();
 
 //Create the alphabet category
@@ -23,44 +24,66 @@ router.get("/alphabet/all", (request, response) => {
   });
 });
 
+//get all words
+router.get("/words/all", (request, response) => {
+  WordsApi.find()
+  .populate("alphabetId")
+  .then((data) => {
+  response.send(data);
+  })
+  .catch((error) => {
+    response.status(500).send("unable to query words list");
+  });
+});
+
 // create words
 router.post("/words", (request, response) => {
   const requestBody = request.body;
   WordsApi.create(requestBody).then((data) => {
-    response.send(data);
-  }).catch(() => {
+    console.log(data);
+    response.send("Word added successfully");
+  }).catch((error) => {
     response.status(500).send("unable to create the word");
   });
 });
 
-//get words
-router.get("/words/all", (request, response) => {
-  WordsApi.find().then((data) => {
+//get words by targetted alphabet ID
+router.get("/words/:alphabetId", (request, response) => {
+  console.log("request params", request.params.alphabetId)
+  WordsApi.find({ alphabetId: request.params.alphabetId }).then((data) => {
     response.send(data);
   }).catch((error) => {
-    response.status(500).send("cannot upload words' list");
+    response.status(500).send("cannot find words by alphabet ID");
   });
 });
 
-//get words random
-router.get("/words/random", (request, response) => {
-  
-  WordsApi.find().then((data) => {
-    let input = e.target.innerHTML;
-    const randomWords = words[input]; 
-    const randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
-    const randomWord = randomWords[randomIndex];
-    $("p").append(`${randomWord} `);
-  response.send(data);
+//get by targetted alphabet name 
+router.get("/alphabet/:name", (request, response) => {
+  console.log("request params", request.params.name)
+  AlphabetApi.find({ name: request.params.name }).then((data) => {
+    console.log("this is the data I get back", data)
+    response.send(data);
   }).catch((error) => {
-    response.status(500).send("cannot upload words' list");
+    response.status(500).send("cannot find by alphabet letter");
   });
 });
+
+//get by targetted word 
+router.get("/words/:name", (request, response) => {
+  console.log("request params", request.params.name)
+  WordsApi.find({ name: request.params.name }).then((data) => {
+    console.log("this is the data I get back", data)
+    response.send(data);
+  }).catch((error) => {
+    response.status(500).send("cannot find word");
+  });
+});
+
 
 
 // update words
 router.patch("/update-word/:id", (request, response) => {
-  WordsModel.findByIdAndUpdate(request.params.id, request.body, {
+  WordsApi.findByIdAndUpdate(request.params.id, request.body, {
     new: true,
     upsert: true,
   })
@@ -77,7 +100,7 @@ router.patch("/update-word/:id", (request, response) => {
 
 // delete words
 router.delete("/delete-word/:id", (request, response) => {
-  WordsModel.findByIdAndDelete(request.params.id)
+  WordsApi.findByIdAndDelete(request.params.id)
     .then((data) => {
       console.log("Delete successful!");
       response.send(data);

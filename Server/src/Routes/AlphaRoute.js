@@ -48,7 +48,7 @@ router.post("/words", (request, response) => {
 });
 
 //get words by targetted alphabet ID
-router.get("/words/:alphabetId", (request, response) => {
+router.get("/words/:id", (request, response) => {
   console.log("request params", request.params.alphabetId)
   WordsApi.find({ alphabetId: request.params.alphabetId }).then((data) => {
     response.send(data);
@@ -57,10 +57,10 @@ router.get("/words/:alphabetId", (request, response) => {
   });
 });
 
-//get by targetted alphabet name 
-router.get("/alphabet/:name", (request, response) => {
-  console.log("request params", request.params.name)
-  AlphabetApi.find({ name: request.params.name }).then((data) => {
+//get by targetted alphabet letter
+router.get("/words/:alphabetName", (request, response) => {
+  console.log("request params", request.params.alphabetName)
+  WordsApi.find({ alphabetName: request.params.alphabetName }).then((data) => {
     console.log("this is the data I get back", data)
     response.send(data);
   }).catch((error) => {

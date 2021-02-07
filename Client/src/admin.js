@@ -1,6 +1,5 @@
 // Import dependent forms
 import homePage from "./homepage";
-import player from "./player"
 
 // Form to create, update or delete words
 const form = `

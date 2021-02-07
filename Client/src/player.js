@@ -74,26 +74,61 @@ const form = `
 </form>
 `;
 
-const player = () => {
-  //Get words from alphabet object
-  $(".btn").on("click", (e) => {
-    $("p").html("");
-    let input = e.target.innerHTML;
-    const randomWords = words[input];
-    const randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
-    const randomWord = randomWords[randomIndex];
-    $("p").append(`${randomWord} `);
-  });
-  //   Clear the text
-  $("#clear").on("click", () => {
-    $("p").html("");
-  });
-   // Exit
-   $(document).on("click", () => {
-    // $("body").empty();
-    $("body").prepend((homePage));
-});
+export const renderForm = () => {
   return form;
+}
+
+const getWordsByLetter = (letter) => {
+  // make API call using letter that is passed into this function
+  console.log(letter);
+  // $(document).on("submit", "#login-user", async (event) => {
+  //     event.preventDefault();
+  //     const formData = {
+  //         name: $("input[name='username']").val(),
+  //         password: $("input[name='password']").val(),
+  //     };
+  //     try {
+  //         const response = await $.ajax({
+  //             type: "POST",
+  //             url: "/api/user/login",
+  //             contentType: "application/json",
+  //             data: JSON.stringify(formData),
+  //         });
+  //         $("body").empty();
+  //         $("body").append(Word());
+  //     } catch (err) {
+  //         window.alert("Unable to log you in!");
+  //         $("body").empty();
+  //         $("body").append(homePage());
+  //     }
+  // });
+  // return form;
+};
+
+const player = () => {
+  const handleButtonClick = $(".btn").on("click", (e) => {
+    e.preventDefault();
+    // $("p").html("");
+    let input = e.target.innerHTML;
+    getWordsByLetter(input)
+
+    // const randomWords = words[input];
+    // const randomIndex = Math.floor(Math.random() * Math.floor(randomWords.length));
+    // const randomWord = randomWords[randomIndex];
+    // $("p").append(`${randomWord} `);
+  });
+  return handleButtonClick;
+  //Get words from alphabet object
+  //   Clear the text
+  // $("#clear").on("click", () => {
+  //   $("p").html("");
+  // });
+  //  // Exit
+  //  $(document).on("click", () => {
+  //   // $("body").empty();
+  //   $("body").prepend((homePage));
+// });
+  // return form;
 };
 
 export default player;

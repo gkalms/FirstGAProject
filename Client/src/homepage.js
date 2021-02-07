@@ -1,6 +1,6 @@
 import registerUser from "./registerUser";
 import loginUser from "./loginUser";
-import player from "./player";
+import player, { renderForm } from "./player";
 
 
 const homepageForm = `
@@ -41,6 +41,7 @@ const homePage = () => {
         event.preventDefault();
         $("body").empty();
         $("body").append(player());
+        $("body").append(renderForm());
     });
     // Logout
     $(document).on("click", "#logout", async (event) => {
